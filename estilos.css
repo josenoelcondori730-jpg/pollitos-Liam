@@ -149,4 +149,28 @@ footer {
 .logo-header{
   height: 10px;
   width: auto;
+  
+/* ── FLEXBOX: una dimensión ──────────────────────────────────────────────*/
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espacio);
 }
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio);
+  margin: 0;
+}
+nav li { margin-bottom: 0; }
+
+/* ── Escalón de tablet ─────────────────────────────────────────────────── */
+@media (min-width: 40rem){
+  h1 {font-size: 2.5rem;}
+     header {padding-inline: var(--espacio-lg);}
+     nav ul {gap: var(--espacio-lg);}
+}
+
