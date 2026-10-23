@@ -1,0 +1,70 @@
+ERRORES Y ARREGLOS DE TU PROYECTO: Pollos Liam (21 de octubre)
+================================================================
+
+proyect_1_NOEL_1 es tu "proyect 1 NOEL" con todo arreglado. Tu carpeta original no se tocó.
+Ábrela con live-server y revisa cada cambio antes de hacer tu commit. La guía "Depurar el render"
+explica cada uno de estos errores.
+
+1. POR QUÉ NO APARECÍAN LAS TARJETAS
+------------------------------------
+- Faltaba el contenedor: seguían tus 3 platos escritos a mano y render.js no encontraba
+  <div id="lista-productos"> ("El contenedor existe: false").
+  -> Los 3 <article> se cambiaron por el <div>. Ahora las 10 tarjetas salen de datos.js, y los 3
+     platos llevan su descripción (la de tus artículos).
+
+2. EL CSS: UNA LLAVE SIN CERRAR
+-------------------------------
+- .logo-header{ height: 10px; width: auto;   ...y faltaba la llave de cierre }.
+  Todo lo que venía después quedaba ADENTRO de esa regla y no se aplicaba: el header con Flexbox,
+  el menú en fila, la rejilla de las tarjetas, el estilo de .tarjeta. Por eso todo salía en una
+  sola columna. -> Se cerró la llave.
+- 10px de alto dejaba el logo casi invisible. -> 120px. Ajústalo si quieres otro tamaño.
+
+3. EL HTML
+----------
+- Había dos <header>: el segundo tenía el logo con dos alt y un </a> y un </div> que no se abrían
+  nunca. -> El logo va en un <div class="encabezado-principal"> con un solo alt.
+- Al final, <main> en vez de </main>: el main nunca se cerraba.
+- La tabla y las fotos quedaban fuera de las secciones, y sobraba un </section>.
+  -> La tabla va dentro de Horarios, y las fotos en tu menú.
+- Había dos elementos con id="contactos" (una sección vacía y el footer). Un id no se repite.
+  -> Se quitó la sección vacía, y el footer es id="contacto".
+- El menú llevaba a #direccion, que no existía. -> "Contacto y dirección" lleva al footer,
+  donde está tu dirección.
+- <input type="hora"> no existe: el navegador lo mostraba como texto. -> type="time".
+- Los value del pedido eran los de la demo de la panadería (dia, integral, molde).
+  -> broaster, spiedo, milanesa.
+- Tildes y mayúsculas: menú, atención, días, Sábado y domingo, más, "bs. 17" -> "Bs 17".
+
+4. LOS SCRIPTS Y LOS DATOS
+--------------------------
+- app.js: quedaban panesEnVitrina y precioPan (de la demo), y comparaba con "0.5". -> pollosEnVitrina,
+  precioPollo = 17. El aviso de stock ya no borra tu eslogan: va en <p id="aviso-stock">.
+- funciones.js: panesVendidos y pastelesVendidos -> pollosVendidos y combosVendidos.
+- datos.js: nombres con mayúscula y bien escritos (Fideo tallarín, Coca-Cola 2 L...).
+
+5. NOMBRES DE ARCHIVO
+---------------------
+- Sin espacios: "logo pollitos liam 2.png" -> logo-pollos-liam.png, "pollitos 2.jpg" ->
+  pollitos-2.jpg, "logo pollos.png" -> logo-pollos.png.
+
+6. LO QUE NO ESTÁ EN ESTA COPIA
+-------------------------------
+- app2.js y funciones.2js: eran las demos descargadas de los Días 5 y 6. Tu index no las usa.
+- "estilos 2": una copia vieja de tu CSS, sin extensión. Siguen en tu carpeta original.
+
+7. LO QUE TE TOCA A TI
+----------------------
+- La milanesa cuesta Bs 15 en las tarjetas (datos.js) y Bs 12 en tu tabla. Corrige uno.
+- Tu horario dice "solo lunes a viernes", pero la milanesa está "Sábado y domingo".
+- Tu último commit es del 13 de octubre y hay 15 archivos sin commit.
+
+CÓMO SEGUIR
+-----------
+Esta carpeta tiene tu .git: es tu mismo repositorio, con toda tu historia. No crees otro.
+Trabaja desde aquí, y la carpeta vieja queda solo de respaldo. En Git Bash, dentro de esta carpeta:
+
+    git add .
+    git commit -m "fix: las tarjetas se generan desde los datos"
+
+git push lo sube a tu mismo GitHub.

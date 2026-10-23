@@ -5,87 +5,78 @@
     <head>
          <meta charset="UTF-8">
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <meta name="description" content="pollos liam, el mejor pollo de colquencha.">
+         <meta name="description" content="Pollos Liam, el mejor pollo de Colquencha.">
          <title>Pollos Liam</title>
          <link rel="stylesheet" href="estilos.css">
     </head>
     <body>
        <header>
          <h1>Pollos Liam</h1>
-         <p>El mejor pollo </p>
+         <p>El mejor pollo de Colquencha</p>
+         <p id="aviso-stock"></p>
          <nav>
           <ul>
-             <li><a href="#menu">Nuestro Menu</a></li>
+             <li><a href="#productos">Nuestro menú</a></li>
              <li><a href="#horarios">Horarios</a></li>
-             <li><a href="#contactos">Contactos</a></li>
-             <li><a href="#direccion">Direccion</a></li>
+             <li><a href="#pedido">Hacer pedido</a></li>
+             <li><a href="#contacto">Contacto y dirección</a></li>
           </ul>
-         </nav>  
+         </nav>
        </header>
-       <header class="encabezado-principal">
-           <img src="logo pollitos liam 2.png" alt="Logo de mi empresa" class="logo"
-            alt="pollitos con el mejor pollo"
+       <div class="encabezado-principal">
+           <img src="logo-pollos-liam.png" alt="Logo de Pollos Liam" class="logo-header"
               width="500" height="400">
-            </a>
-            </div>
-           </header>
-       
+       </div>
+
        <main>
-        <section id="menu">
-            <h2>Nuestro Menu</h2>
-            <article>
-                <h3>pollo broaster sencillo</h3>
-                <p>cuarto de pollo a eleccion 2 guarniciones</p> 
-            </article>
-            
-            <article>
-                <h3>pollo spiedo mixto</h3>
-                <p>pollo entero o por presa</p>
-            </article>
+        <section id="productos">
+            <h2>Nuestro menú</h2>
 
-            <article>
-                <h3>milanesa mixta</h3>
-                <p>platos de milanesa</p>
-            </article>
+            <!-- Controles para el buscador y filtros gestionados por eventos.js -->
+            <div class="controles" role="search">
+              <label for="buscador" class="visualmente-oculto">Buscar producto</label>
+              <input type="search" id="buscador" placeholder="Buscar producto...">
 
+              <div id="filtros">
+                <button type="button" data-categoria="todos" class="activo">Todos</button>
+                <button type="button" data-categoria="platos">Platos</button>
+                <button type="button" data-categoria="snacks">Snacks</button>
+                <button type="button" data-categoria="guarniciones">Guarniciones</button>
+                <button type="button" data-categoria="bebidas">Bebidas</button>
+              </div>
+            </div>
+
+            <p id="resultado" aria-live="polite"></p>
+
+            <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
+            <div id="lista-productos"></div>
+
+            <figure>
+                <img src="pollitos.jpg" alt="Platos de pollo de Pollos Liam" width="600" height="400">
+                <img src="pollitos-2.jpg" alt="Más platos de pollo de Pollos Liam" width="600" height="400">
+                <figcaption>Pollitos en el mejor momento del día.</figcaption>
+            </figure>
         </section>
+
         <section id="horarios">
-            <article>
-                <h3>horarios de atencion</h3>
-                <p>solo lunes a viernes</p>
-            </article>
-        </section>
+            <h2>Horarios de atención</h2>
+            <p>Solo de lunes a viernes.</p>
+
         <table>
-             <caption>precios por combo y disponibilidad </caption>
+             <caption>Precios por combo y disponibilidad</caption>
              <thead>
                  <tr>
-                    <th scope="col">Combo </th>
-                    <th scope="col">Precio </th>
-                    <th scope="col">Disponible </th>
+                    <th scope="col">Combo</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Disponible</th>
                  </tr>
               </thead>
               <tbody>
-               <tr> <td>Broaster </td>  <td>bs. 17 </td> <td>Todos los dias</td></tr>
-               <tr> <td>Spiedo </td>  <td>bs. 17 </td> <td>Todos los dias</td></tr>
-               <tr> <td>Milanesa </td>  <td>bs. 12 </td> <td>Sabado y Domingo</td></tr>
-              </tbody>
+               <tr> <td>Broaster</td>  <td>Bs 17</td> <td>Todos los días</td></tr>
+               <tr> <td>Spiedo</td>  <td>Bs 17</td> <td>Todos los días</td></tr>
+               <tr> <td>Milanesa</td>  <td>Bs 15</td> <td>Lunes a viernes</td></tr>
+            </tbody>
         </table>
-
-        <figure>
-            <img src="pollitos.jpg"
-              alt="pollitos con el mejor pollo"
-              width="600" height="400">
-            <figcaption>Pollitos en le mejor momento del dia. </figcaption>
-            <img src="pollitos 2.jpg"
-              alt="pollitos con el mejor pollo"
-              width="600" height="400"> 
-        </figure> 
-      </section>
-        <section id="contactos">
-            <article> 
-                <h3>contactos</h3>
-                <p></p>
-            </article>
         </section>
 
          <section id="pedido">
@@ -117,9 +108,10 @@
               <label for="producto">Producto</label>
               <select id="producto" name="producto" required>
                 <option value="">Elige uno</option>
-                <option value="dia">Combo broaster</option>
-                <option value="integral">Spiedo mixto</option>
-                <option value="molde">Milanesa</option>
+                <option value="broaster">Combo broaster</option>
+                <option value="spiedo">Spiedo mixto</option>
+                <option value="milanesa">Milanesa</option>
+                <option value="Alitas de pollo">Alitas de pollo</option>
               </select>
             </p>
             <p>
@@ -128,8 +120,12 @@
                      min="1" max="100" value="1" required>
             </p>
             <p>
-              <label for="fecha">Hora de entrega</label>
-              <input type="hora" id="fecha" name="fecha" required>
+              <label for="fecha">Fecha de entrega</label>
+              <input type="date" id="fecha" name="fecha" required>
+            </p>
+            <p>
+              <label for="hora">Hora de entrega</label>
+              <input type="time" id="hora" name="hora" required>
             </p>
             <p>
               <label for="notas">Alguna indicación</label>
@@ -142,28 +138,31 @@
           </fieldset>
           <button type="submit">Enviar pedido</button>
         </form>
-      </section>
+       </section>
+       </main>
 
-    <main>
         <aside>
-            <h2>¿sabias que?  </h2>
-             <p>vendemos los pollos mas grandes  </p>
+            <h2>¿Sabías que...?</h2>
+             <p>Vendemos los pollos más grandes.</p>
         </aside>
-        <footer id="contactos">
-             <h2> contacto </h2>
+        <footer id="contacto">
+             <h2>Contacto</h2>
               <address>
                 Av. La Paz  <br>
-                telefono: 63050938
+                Teléfono: 63050938
               </address>
-               <p> <small>&copy; 2026 pollos liam  </small> </p>
+               <p><small>&copy; 2026 Pollos Liam</small></p>
         </footer>
-        <style>
-         table {
-           margin-left: auto;
-              margin-right: auto;
-            /* O de forma abreviada: margin: 0 auto; */
-             }
-</style>
+
+      <!-- 1. Librería jQuery (local) -->
+      <script src="jquery.min.js"></script>
+
+      <!-- 2. Scripts del proyecto con jQuery integrado completamente -->
+      <script src="app.js"></script>
+      <script src="funciones.js"></script>
+      <script src="datos.js"></script>
+      <script src="render.js"></script>
+      <script src="eventos.js"></script>
         
     </body>
  </html>
