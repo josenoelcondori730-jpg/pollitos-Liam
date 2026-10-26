@@ -1,180 +1,227 @@
 <!DOCTYPE html>
 <html lang="es">
-     
-        
-    <head>
-         <meta charset="UTF-8">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <meta name="description" content="Pollos Liam, el mejor pollo de Colquencha.">
-         <title>Pollos Liam</title>
-         <link rel="stylesheet" href="estilos.css">
-    </head>
-    <body>
-       <header>
-         <h1>Pollos Liam</h1>
-         <p>El mejor pollo de Colquencha</p>
-         <p id="aviso-stock"></p>
-         <nav>
-          <ul>
-             <li><a href="#productos">Nuestro menú</a></li>
-             <li><a href="#horarios">Horarios</a></li>
-             <li><a href="#pedido">Hacer pedido</a></li>
-             <li><a href="#contacto">Contacto y dirección</a></li>
-          </ul>
-         </nav>
-       </header>
-       <div class="encabezado-principal">
-           <img src="logo-pollos-liam.png" alt="Logo de Pollos Liam" class="logo-header"
-              width="500" height="400">
-       </div>
-
-       <main>
-        <section id="productos">
-            <h2>Nuestro menú</h2>
-
-            <!-- Controles para el buscador y filtros gestionados por eventos.js -->
-            <div class="controles" role="search">
-              <label for="buscador" class="visualmente-oculto">Buscar producto</label>
-              <input type="search" id="buscador" placeholder="Buscar producto...">
-
-              <div id="filtros">
-                <button type="button" data-categoria="todos" class="activo">Todos</button>
-                <button type="button" data-categoria="platos">Platos</button>
-                <button type="button" data-categoria="snacks">Snacks</button>
-                <button type="button" data-categoria="guarniciones">Guarniciones</button>
-                <button type="button" data-categoria="bebidas">Bebidas</button>
-              </div>
-            </div>
-
-            <p id="resultado" aria-live="polite"></p>
-
-            <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
-            <div id="lista-productos"></div>
-
-            <figure>
-                <img src="pollitos.jpg" alt="Platos de pollo de Pollos Liam" width="600" height="400">
-                <img src="pollitos-2.jpg" alt="Más platos de pollo de Pollos Liam" width="600" height="400">
-                <figcaption>Pollitos en el mejor momento del día.</figcaption>
-            </figure>
-        </section>
-
-        <section id="horarios">
-            <h2>Horarios de atención</h2>
-            <p>Solo de lunes a viernes.</p>
-
-        <table>
-             <caption>Precios por combo y disponibilidad</caption>
-             <thead>
-                 <tr>
-                    <th scope="col">Combo</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Disponible</th>
-                 </tr>
-              </thead>
-              <tbody>
-               <tr> <td>Broaster</td>  <td>Bs 17</td> <td>Todos los días</td></tr>
-               <tr> <td>Spiedo</td>  <td>Bs 17</td> <td>Todos los días</td></tr>
-               <tr> <td>Milanesa</td>  <td>Bs 15</td> <td>Lunes a viernes</td></tr>
-            </tbody>
-        </table>
-        </section>
-
-         <section id="pedido">
-        <h2>Hacer un pedido</h2>
-        <form action="/pedido" method="post">
-          <fieldset>
-            <legend>Tus datos</legend>
-            <p>
-              <label for="nombre">Nombre completo</label>
-              <input type="text" id="nombre" name="nombre"
-                     autocomplete="name" required>
-            </p>
-            <p>
-              <label for="email">Correo electrónico</label>
-              <input type="email" id="email" name="email"
-                     autocomplete="email" required>
-            </p>
-            <p>
-              <label for="telefono">Teléfono</label>
-              <input type="tel" id="telefono" name="telefono"
-                     autocomplete="tel" pattern="[0-9]{7,8}"
-                     title="7 u 8 dígitos, sin espacios">
-            </p>
-          </fieldset>
-          <fieldset>
-            <legend>Tu pedido</legend>
-
-            <p>
-              <label for="producto">Producto</label>
-              <select id="producto" name="producto" required>
-                <option value="">Elige uno</option>
-                <option value="broaster">Combo broaster</option>
-                <option value="spiedo">Spiedo mixto</option>
-                <option value="milanesa">Milanesa</option>
-                <option value="Alitas de pollo">Alitas de pollo</option>
-              </select>
-            </p>
-            <p>
-              <label for="cantidad">Cantidad</label>
-              <input type="number" id="cantidad" name="cantidad"
-                     min="1" max="100" value="1" required>
-            </p>
-            <p>
-              <label for="fecha">Fecha de entrega</label>
-              <input type="date" id="fecha" name="fecha" required>
-            </p>
-            <p>
-              <label for="hora">Hora de entrega</label>
-              <input type="time" id="hora" name="hora" required>
-            </p>
-            <p>
-              <label for="notas">Alguna indicación</label>
-              <textarea id="notas" name="notas" rows="3"></textarea>
-            </p>
-            <p>
-              <input type="checkbox" id="terminos" name="terminos" required>
-              <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
-            </p>
-          </fieldset>
-          <button type="submit">Enviar pedido</button>
-        </form>
-       </section>
-       </main>
-
-        <aside>
-            <h2>¿Sabías que...?</h2>
-             <p>Vendemos los pollos más grandes.</p>
-        </aside>
-        <footer id="contacto">
-             <h2>Contacto</h2>
-              <address>
-                Av. La Paz  <br>
-                Teléfono: 63050938
-              </address>
-               <p><small>&copy; 2026 Pollos Liam</small></p>
-        </footer>
-
-      <!-- 1. Librería jQuery (local) -->
-      <script src="jquery.min.js"></script>
-
-      <!-- 2. Scripts del proyecto con jQuery integrado completamente -->
-      <script src="app.js"></script>
-      <script src="funciones.js"></script>
-      <script src="datos.js"></script>
-      <script src="render.js"></script>
-      <script src="eventos.js"></script>
-        
-    </body>
- </html>
 
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pollos Liam, el mejor pollo de Colquencha.">
+  <title>Pollos Liam</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
 
+<body>
+  <header>
+    <h1>Pollos Liam</h1>
+    <p>El mejor pollo de Colquencha</p>
+    <p id="aviso-stock"></p>
+    <button id="menu-toggle" aria-expanded="false" aria-controls="menu-movil" class="btn-menu-movil">
+      ☰ Menú
+    </button>
+    <nav id="menu-movil">
+      <ul>
+        <li><a href="#productos">Nuestro menú</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+        <li><a href="#pedido">Hacer pedido</a></li>
+        <li><a href="#contacto">Contacto y dirección</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="encabezado-principal">
+    <img src="logo-pollos-liam.png" alt="Logo de Pollos Liam" class="logo-header" width="500" height="400">
+  </div>
 
-            
-                
-                 
+  <main>
+    <section id="productos">
+      <h2>Nuestro menú</h2>
 
-       
+      <!-- Controles para el buscador y filtros gestionados por eventos.js -->
+      <div class="controles" role="search">
+        <label for="buscador" class="visualmente-oculto">Buscar producto</label>
+        <input type="search" id="buscador" placeholder="Buscar producto...">
 
+        <div id="filtros">
+          <button type="button" data-categoria="todos" class="activo">Todos</button>
+          <button type="button" data-categoria="platos">Platos</button>
+          <button type="button" data-categoria="snacks">Snacks</button>
+          <button type="button" data-categoria="guarniciones">Guarniciones</button>
+          <button type="button" data-categoria="bebidas">Bebidas</button>
+        </div>
+      </div>
 
-       
+      <p id="resultado" aria-live="polite"></p>
+
+      <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
+      <div id="lista-productos"></div>
+
+      <figure>
+        <img src="pollitos.jpg" alt="Platos de pollo de Pollos Liam" width="600" height="400">
+        <img src="pollitos-2.jpg" alt="Más platos de pollo de Pollos Liam" width="600" height="400">
+        <figcaption>Pollitos en el mejor momento del día.</figcaption>
+      </figure>
+    </section>
+
+    <section id="horarios">
+      <h2>Horarios de atención</h2>
+      <p>Solo de lunes a viernes.</p>
+
+      <table>
+        <caption>Precios por combo y disponibilidad</caption>
+        <thead>
+          <tr>
+            <th scope="col">Combo</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Disponible</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Broaster</td>
+            <td>Bs 17</td>
+            <td>Todos los días</td>
+          </tr>
+          <tr>
+            <td>Spiedo</td>
+            <td>Bs 17</td>
+            <td>Todos los días</td>
+          </tr>
+          <tr>
+            <td>Milanesa</td>
+            <td>Bs 15</td>
+            <td>Lunes a viernes</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Panel informativo: jquery-panel.js usa resaltar() sobre su h2 -->
+    <section id="panel">
+      <h2>Información del local</h2>
+      <p>Estamos ubicados en Av. La Paz, Colquencha. Atendemos de lunes a viernes de 11:00 a 21:00. ¡Te esperamos con el
+        mejor pollo!</p>
+
+      <!-- Acordeón de preguntas frecuentes -->
+      <div id="acordeon">
+        <div class="item-acordeon">
+          <button class="titulo" aria-expanded="false">¿Hacen delivery a domicilio?</button>
+          <div class="cuerpo">
+            <p>Sí, hacemos delivery dentro de Colquencha sin costo adicional. Llama al 63050938 para coordinar tu entrega.</p>
+          </div>
+        </div>
+        <div class="item-acordeon">
+          <button class="titulo" aria-expanded="false">¿Qué formas de pago aceptan?</button>
+          <div class="cuerpo">
+            <p>Aceptamos efectivo y código QR (transferencia bancaria). Por el momento no trabajamos con tarjetas de crédito ni débito.</p>
+          </div>
+        </div>
+        <div class="item-acordeon">
+          <button class="titulo" aria-expanded="false">¿Con cuánto tiempo debo hacer mi pedido?</button>
+          <div class="cuerpo">
+            <p>Para pedidos de más de 5 pollos, te pedimos reservar con al menos 24 horas de anticipación llamando al 63050938.</p>
+          </div>
+        </div>
+        <div class="item-acordeon">
+          <button class="titulo" aria-expanded="false">¿Cuáles son los combos disponibles?</button>
+          <div class="cuerpo">
+            <p>Ofrecemos Combo Broaster (Bs 17), Spiedo mixto (Bs 17) disponibles todos los días, y Milanesa (Bs 15) de lunes a viernes.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Avisos con aparición escalonada -->
+      <div class="avisos-bloque">
+        <button id="mostrar-avisos" type="button">Mostrar avisos</button>
+        <ul id="avisos">
+          <li>🔥 Promo viernes: combo broaster + refresco a solo Bs 20.</li>
+          <li>🐔 Nuevo en carta: alitas BBQ disponibles desde esta semana.</li>
+          <li>⏰ Feriados: atendemos en horario reducido de 12:00 a 18:00.</li>
+          <li>📦 Pedidos al por mayor con descuento especial. ¡Consulta!</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="pedido">
+      <h2>Hacer un pedido</h2>
+      <form action="/pedido" method="post">
+        <fieldset>
+          <legend>Tus datos</legend>
+          <p>
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </p>
+          <p>
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </p>
+          <p>
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
+              title="7 u 8 dígitos, sin espacios">
+          </p>
+        </fieldset>
+        <fieldset>
+          <legend>Tu pedido</legend>
+
+          <p>
+            <label for="producto">Producto</label>
+            <select id="producto" name="producto" required>
+              <option value="">Elige uno</option>
+              <option value="broaster">Combo broaster</option>
+              <option value="spiedo">Spiedo mixto</option>
+              <option value="milanesa">Milanesa</option>
+              <option value="Alitas de pollo">Alitas de pollo</option>
+            </select>
+          </p>
+          <p>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
+          </p>
+          <p>
+            <label for="fecha">Fecha de entrega</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </p>
+          <p>
+            <label for="hora">Hora de entrega</label>
+            <input type="time" id="hora" name="hora" required>
+          </p>
+          <p>
+            <label for="notas">Alguna indicación</label>
+            <textarea id="notas" name="notas" rows="3"></textarea>
+          </p>
+          <p>
+            <input type="checkbox" id="terminos" name="terminos" required>
+            <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
+          </p>
+        </fieldset>
+        <button type="submit">Enviar pedido</button>
+      </form>
+    </section>
+  </main>
+
+  <aside>
+    <h2>¿Sabías que...?</h2>
+    <p>Vendemos los pollos más grandes.</p>
+  </aside>
+  <footer id="contacto">
+    <h2>Contacto</h2>
+    <address>
+      Av. La Paz <br>
+      Teléfono: 63050938
+    </address>
+    <p><small>&copy; 2026 Pollos Liam</small></p>
+  </footer>
+
+  <!-- 1. Librería jQuery (local) -->
+  <script src="jquery.min.js"></script>
+
+  <!-- 2. Scripts del proyecto con jQuery integrado completamente -->
+  <script src="app.js"></script>
+  <script src="funciones.js"></script>
+  <script src="datos.js"></script>
+  <script src="render.js"></script>
+  <script src="eventos.js"></script>
+  <script src="jquery-panel.js"></script>
+  <script src="jquery-comparado.js"></script>
+</body>
+
+</html>
