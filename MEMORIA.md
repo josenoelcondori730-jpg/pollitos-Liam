@@ -12,7 +12,7 @@
 | **Ubicación** | Av. La Paz, Colquencha |
 | **Contacto del Negocio** | Tel. 63050938 |
 | **Año de Fundación** | 1998 |
-| **Versión del Documento** | 1.1 (23 de Octubre de 2026) |
+| **Versión del Documento** | 1.2 (27 de Octubre de 2026) |
 | **Tecnologías Principales** | HTML5 Semántico, CSS3 (Grid & Flexbox), JavaScript ES6+, jQuery 3.7.1 |
 
 ---
@@ -32,6 +32,7 @@ Se desarrolló una aplicación web interactiva, moderna y 100% responsiva que:
 - Ofrece búsqueda instantánea por texto y filtrado por categoría sin recargas de página.
 - Permite seleccionar un producto directamente desde su tarjeta para cargarlo automáticamente en el formulario de pedidos.
 - Aplica la librería **jQuery 3.7.1** de forma integral a todos los módulos (manipulación DOM, animaciones, navegación fluida, eventos y utilidades).
+- Incluye una sección de catálogo del proveedor que consulta datos JSON mediante `fetch` o jQuery e informa los estados de carga y error.
 - Cuenta con un formulario con validación estricta de fechas y campos requeridos.
 
 ---
@@ -51,6 +52,8 @@ graph TD
         D --> H[app.js - Estado Global, Aviso Animado & Navegación Suave]
         D --> I[render.js - Construcción Pura de Tarjetas con jQuery]
         D --> J[eventos.js - Búsqueda, Filtros Reactivos & Submit Serializado]
+        D --> K[remoto.js - Peticiones fetch y jQuery]
+        K --> L[datos.json - Catálogo JSON del proveedor]
     end
 ```
 
@@ -74,6 +77,8 @@ proyect_1_NOEL_1/
 ├── app.js                       # Estado global, aviso animado de stock y navegación fluida
 ├── render.js                    # Generación pura de elementos DOM y tarjetas con jQuery
 ├── eventos.js                   # Búsqueda reactiva, filtros, pedido asistido y submit serializado
+├── remoto.js                    # Carga el catálogo externo con fetch y jQuery
+├── datos.json                   # Datos JSON del catálogo del proveedor
 ├── jquery.min.js                # Librería jQuery versión 3.7.1 (distribución local)
 ├── logo-pollos-liam.png         # Logotipo oficial del restaurante
 ├── pollitos.jpg / pollitos-2.jpg# Fotografías de presentación y catálogo
@@ -142,6 +147,13 @@ En versiones previas del laboratorio existía una sección comparativa que contr
 - Se eliminaron las reglas CSS obsoletas y se añadieron estilos de interacción real (`.btn-seleccionar`, `.btn-agotado`, `.fila-hover`).
 - Se adoptó jQuery en el 100% de los componentes visuales y funcionales de la aplicación.
 
+### 5.7. `remoto.js` y catálogo del proveedor
+- `index.html` incluye la sección `#remoto` dentro del contenido principal, con controles para probar `fetch`, jQuery y una respuesta de error.
+- `remoto.js` consulta `datos.json`, valida la estructura recibida y presenta los productos y el estado de cada solicitud.
+- Las tarjetas remotas se construyen con elementos DOM y `textContent` para tratar los nombres recibidos como texto, no como marcado HTML.
+- `datos.json` contiene los diez productos del catálogo y los campos requeridos: nombre del negocio, nombre, precio, unidad, stock y disponibilidad.
+- La carga requiere servir el proyecto por HTTP, por ejemplo, con Live Server; abrir `index.html` directamente puede impedir las solicitudes `fetch`.
+
 ---
 
 ## 6. Evolución del Proyecto (Fases y Laboratorios)
@@ -177,7 +189,8 @@ En versiones previas del laboratorio existía una sección comparativa que contr
 # Abrir el directorio del proyecto
 cd "proyect_1_NOEL_1"
 
-# Iniciar con Live Server desde VS Code o abrir index.html directamente en el navegador
+# Iniciar Live Server desde VS Code para que funcionen las solicitudes a datos.json
+# Alternativamente, ejecutar: python -m http.server 8000
 ```
 
 ---
@@ -194,3 +207,5 @@ cd "proyect_1_NOEL_1"
   - `funciones.js`: Incorporación de utilidades funcionales globales de jQuery (`$.type`, `$.map`, `$.grep`, `$.trim`, `$.extend`).
   - `.gitignore`: Inclusión de `.vscode/`.
   - `MEMORIA.md`: Actualización integral de la documentación técnica.
+
+- **Integración del catálogo remoto (27 de Octubre de 2026):** Se conectó la sección de `index.html` con `remoto.js`, se añadió `datos.json` y se documentó la ejecución mediante servidor local.

@@ -55,8 +55,9 @@
       <div id="lista-productos"></div>
 
       <figure>
-        <img src="pollitos.jpg" alt="Platos de pollo de Pollos Liam" width="600" height="400">
-        <img src="pollitos-2.jpg" alt="Más platos de pollo de Pollos Liam" width="600" height="400">
+        <img src="broaster.jpeg" alt="Platos de pollo de Pollos Liam" width="600" height="400">
+        <img src="spiedo.jpeg" alt="Más platos de pollo de Pollos Liam" width="600" height="400">
+           <img src="cocaquina.jpeg" alt="Gaseosas" width="600" height="400">
         <figcaption>Pollitos en el mejor momento del día.</figcaption>
       </figure>
     </section>
@@ -196,6 +197,21 @@
         <button type="submit">Enviar pedido</button>
       </form>
     </section>
+
+    <!-- Zona del día 12: datos que llegan por la red -->
+    <section id="remoto">
+      <h2>Catálogo del proveedor</h2>
+      <p>Consulta los productos recibidos desde el catálogo del proveedor.</p>
+
+      <div class="controles-remotos">
+        <button type="button" id="cargar-fetch">Cargar con fetch</button>
+        <button type="button" id="cargar-jquery">Cargar con jQuery</button>
+        <button type="button" id="cargar-roto">Probar un error</button>
+      </div>
+
+      <p id="estado" role="status" aria-live="polite"></p>
+      <div id="lista-remota"></div>
+    </section>
   </main>
 
   <aside>
@@ -210,9 +226,8 @@
     </address>
     <p><small>&copy; 2026 Pollos Liam</small></p>
   </footer>
-
   <!-- 1. Librería jQuery (local) -->
-  <script src="jquery.min.js"></script>
+  <script src="jquery-min.js"></script>
 
   <!-- 2. Scripts del proyecto con jQuery integrado completamente -->
   <script src="app.js"></script>
@@ -222,6 +237,7 @@
   <script src="eventos.js"></script>
   <script src="jquery-panel.js"></script>
   <script src="jquery-comparado.js"></script>
+  <script src="remoto.js"></script>
 </body>
 
 </html>

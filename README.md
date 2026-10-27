@@ -31,6 +31,9 @@
 - **Layout:** [Se utilizó flexbox para alinear los bloques, imagenes para mandarlo a un costado, donde grid me permitio organizar elementos en filas y columnas al mismo tiempo.]
 - **Diseño:** [Se utilizo una paleta de colores de rojo y amarillo ya que este es un color que se usa mucho en este tipo de negocios, en la tipografia se uso segoe ui debido a que este es formal y legible. ]
 
+## Catálogo del proveedor
+La sección **Catálogo del proveedor** carga los productos de `datos.json` usando `fetch` o jQuery. Para usar estas funciones, abre el proyecto mediante un servidor local (por ejemplo, la extensión Live Server de VS Code); abrir `index.html` directamente como archivo puede bloquear las solicitudes HTTP.
+
 ## Capturas
 ![Escritorio](cap1.png)
 ![Móvil 375px](ruta/a/captura-movil.png) DESPUES, PROXIMA SEMANA
@@ -86,4 +89,3 @@ Se incorporó la librería **jQuery** para simplificar y optimizar la manipulaci
 
 
  
-
