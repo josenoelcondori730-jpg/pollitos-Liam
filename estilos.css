@@ -499,12 +499,10 @@ aside p {
   cursor: not-allowed;
   opacity: 0.6;
 }
-
 .fila-hover {
   background-color: #fff4e6 !important;
   transition: background-color 0.2s ease;
 }
-
 .sin-productos {
   text-align: center;
   padding: var(--espacio-lg);
@@ -512,7 +510,6 @@ aside p {
   font-style: italic;
   font-size: 1.1rem;
 }
-
 /* ── 19. MENÚ MÓVIL (jquery-panel.js) ─────────────────────────────────── */
 .btn-menu-movil {
   display: none;
@@ -526,60 +523,48 @@ aside p {
   cursor: pointer;
   min-height: 40px;
 }
-
 @media (max-width: 40rem) {
   header {
     align-items: flex-start;
   }
-
   header h1,
   header > p,
   #aviso-stock {
     flex-basis: 100%;
   }
-
   .encabezado-principal {
     padding-block: var(--espacio);
   }
-
   .logo-header {
     height: 96px;
   }
-
   main > section:not(#productos) {
     padding: var(--espacio);
   }
-
   .btn-menu-movil {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
   }
-
   #menu-movil {
     display: none;
     width: 100%;
   }
-
   #menu-movil ul {
     flex-direction: column;
     gap: 0.4rem;
     padding: var(--espacio) 0;
   }
-
   #lista-productos {
     grid-template-columns: 1fr;
   }
-
   #lista-remota {
     grid-template-columns: 1fr;
   }
-
   figure img {
     height: 13rem;
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -590,7 +575,6 @@ aside p {
     transition-duration: 0.01ms !important;
   }
 }
-
 /* ── 20. SECCIÓN PANEL (jquery-panel.js) ──────────────────────────────── */
 #panel {
   background: var(--color-superficie);
@@ -600,7 +584,6 @@ aside p {
   padding: var(--espacio-lg);
   margin-block: var(--espacio-lg);
 }
-
 #panel>h2 {
   margin-top: 0;
 }

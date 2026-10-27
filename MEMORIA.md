@@ -12,7 +12,7 @@
 | **Ubicación** | Av. La Paz, Colquencha |
 | **Contacto del Negocio** | Tel. 63050938 |
 | **Año de Fundación** | 1998 |
-| **Versión del Documento** | 1.2 (27 de Octubre de 2026) |
+| **Versión del Documento** | 1.3 (27 de Octubre de 2026) |
 | **Tecnologías Principales** | HTML5 Semántico, CSS3 (Grid & Flexbox), JavaScript ES6+, jQuery 3.7.1 |
 
 ---
@@ -46,7 +46,7 @@ graph TD
     B --> D[Lógica de la Aplicación]
     
     subgraph Capa Lógica (jQuery 3.7.1 + ES6)
-        D --> E[jquery.min.js - Librería Núcleo DOM]
+        D --> E[jquery-min.js - Librería Núcleo DOM]
         D --> F[datos.js - Catálogo de Productos & Clases POO]
         D --> G[funciones.js - Lógica, Closures & Utilidades jQuery]
         D --> H[app.js - Estado Global, Aviso Animado & Navegación Suave]
@@ -60,6 +60,7 @@ graph TD
 ### 3.1. Tecnologías Empleadas
 - **HTML5:** Marcado semántico estructurado (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<figure>`, `<table>`, `<form>`, `<aside>`, `<footer>`).
 - **CSS3:** Sistema de diseño con variables personalizadas (`:root`), modelo de caja estandarizado (`box-sizing: border-box`), maquetación con **Flexbox** y **CSS Grid**, media queries adaptables y estilos para estados de interacción (`.btn-seleccionar`, `.fila-hover`, `.resaltado`).
+- **Diseño visual:** Se conserva la paleta original de Pollos Liam, con amarillo como fondo y rojo como color principal; el CSS incorpora presentación responsive para las secciones y tarjetas del catálogo.
 - **JavaScript (ES6+):** Programación funcional, destructuración, funciones flecha, closures y programación orientada a objetos (clases con herencia).
 - **jQuery 3.7.1:** Adopción plena en toda la aplicación para manipulación fluida del DOM, encadenamiento (*chaining*), delegación de eventos, animaciones de transición (`fadeIn`, `animate`) y funciones utilitarias globales (`$.grep`, `$.each`, `$.map`, `$.trim`, `$.type`, `$.extend`).
 
@@ -79,9 +80,11 @@ proyect_1_NOEL_1/
 ├── eventos.js                   # Búsqueda reactiva, filtros, pedido asistido y submit serializado
 ├── remoto.js                    # Carga el catálogo externo con fetch y jQuery
 ├── datos.json                   # Datos JSON del catálogo del proveedor
-├── jquery.min.js                # Librería jQuery versión 3.7.1 (distribución local)
+├── jquery-min.js                # Librería jQuery versión 3.7.1 (distribución local)
 ├── logo-pollos-liam.png         # Logotipo oficial del restaurante
-├── pollitos.jpg / pollitos-2.jpg# Fotografías de presentación y catálogo
+├── broaster.jpeg                # Fotografía de pollo broaster en la página
+├── spiedo.jpeg                  # Fotografía de pollo spiedo en la página
+├── cocaquina.jpeg               # Fotografía de bebidas en la página
 ├── imagenes/                    # Directorio de recursos gráficos de los productos
 ├── ERRORES Y ARREGLOS...txt     # Bitácora histórica de resolución de problemas
 ├── MEMORIA.md                   # Memoria técnica completa y actualizada
@@ -148,11 +151,12 @@ En versiones previas del laboratorio existía una sección comparativa que contr
 - Se adoptó jQuery en el 100% de los componentes visuales y funcionales de la aplicación.
 
 ### 5.7. `remoto.js` y catálogo del proveedor
-- `index.html` incluye la sección `#remoto` dentro del contenido principal, con controles para probar `fetch`, jQuery y una respuesta de error.
-- `remoto.js` consulta `datos.json`, valida la estructura recibida y presenta los productos y el estado de cada solicitud.
+- `index.html` incluye la sección `#remoto` dentro del contenido principal, con controles para probar `fetch`, jQuery y una respuesta de error. Carga `remoto.js` después de la librería jQuery y los scripts que definen el catálogo local.
+- `remoto.js` consulta `datos.json` automáticamente al abrir la página; los botones permiten repetir la carga con `fetch` o jQuery y probar un error.
+- Si la solicitud remota falla (por ejemplo, al abrir la página sin un servidor local), `remoto.js` muestra los productos de `datos.js` como respaldo e informa el problema en el estado de la sección. Los errores no dejan vacía la lista.
 - Las tarjetas remotas se construyen con elementos DOM y `textContent` para tratar los nombres recibidos como texto, no como marcado HTML.
 - `datos.json` contiene los diez productos del catálogo y los campos requeridos: nombre del negocio, nombre, precio, unidad, stock y disponibilidad.
-- La carga requiere servir el proyecto por HTTP, por ejemplo, con Live Server; abrir `index.html` directamente puede impedir las solicitudes `fetch`.
+- Para que el catálogo provenga de `datos.json`, hay que servir el proyecto por HTTP, por ejemplo, con Live Server; al abrir `index.html` directamente, se muestra el catálogo local de respaldo.
 
 ---
 
@@ -162,8 +166,9 @@ En versiones previas del laboratorio existía una sección comparativa que contr
 | :--- | :--- | :--- |
 | **Lab 1: Maquetación y CSS** | Estructura y diseño visual | Marcado semántico HTML5, tabla de precios, Flexbox, CSS Grid y paleta de colores. |
 | **Lab 2: JavaScript Dinámico** | Interactividad y datos | Catálogo estructurado en `datos.js`, render dinámico, búsqueda y validación de formulario. |
-| **Lab 3: Introducción a jQuery** | Comparativa de librerías | Integración de `jquery.min.js`, scripts híbridos y sección de contraste. |
+| **Lab 3: Introducción a jQuery** | Comparativa de librerías | Integración de `jquery-min.js`, scripts híbridos y sección de contraste. |
 | **Lab 4: Adopción Integral (Actual)** | Homogeneización y UX | Retiro de botones de prueba, aplicación de jQuery a todo el sistema, scroll suave y pedido asistido. |
+| **Lab 5: Catálogo remoto** | Peticiones HTTP y JSON | Catálogo remoto con `fetch` y jQuery, estados de solicitud y respaldo con el menú local. |
 
 ---
 
@@ -175,6 +180,9 @@ En versiones previas del laboratorio existía una sección comparativa que contr
 4. **Tipos de Input no Estándar:** Corrección de `<input type="hora">` a `<input type="time">`.
 5. **Nombres de Archivos:** Estandarización sin espacios para compatibilidad multiplataforma.
 6. **Consolidación de Librería (23 de Octubre de 2026):** Homogeneización de la sintaxis y ciclo de vida de la aplicación usando jQuery 3.7.1 de extremo a extremo.
+7. **Tarjetas ausentes por nombre de librería desactualizado:** La página referenciaba `jquery.min.js`, pero el archivo disponible se llama `jquery-min.js`. Se corrigió el `<script>` de `index.html`; al no cargar jQuery, tampoco se ejecutaban `render.js` ni `eventos.js`. Se verificó que el menú vuelve a mostrar los diez productos y que el catálogo remoto renderiza sus diez productos.
+8. **Catálogo remoto vacío cuando falla la petición:** Se añadió la carga automática y el respaldo desde `datos.js`, con un mensaje visible que explica el error remoto, de modo que la sección conserve los productos disponibles.
+9. **Actualización de imágenes de presentación:** `index.html` utiliza `broaster.jpeg`, `spiedo.jpeg` y `cocaquina.jpeg` en la galería del menú.
 
 ---
 
@@ -189,7 +197,8 @@ En versiones previas del laboratorio existía una sección comparativa que contr
 # Abrir el directorio del proyecto
 cd "proyect_1_NOEL_1"
 
-# Iniciar Live Server desde VS Code para que funcionen las solicitudes a datos.json
+# Iniciar Live Server desde VS Code para cargar datos.json mediante HTTP.
+# Si se abre index.html directamente, se muestra el catálogo local de respaldo.
 # Alternativamente, ejecutar: python -m http.server 8000
 ```
 
@@ -209,3 +218,4 @@ cd "proyect_1_NOEL_1"
   - `MEMORIA.md`: Actualización integral de la documentación técnica.
 
 - **Integración del catálogo remoto (27 de Octubre de 2026):** Se conectó la sección de `index.html` con `remoto.js`, se añadió `datos.json` y se documentó la ejecución mediante servidor local.
+- **Cambios de la rama `agente-ofertas` (27 de Octubre de 2026):** Se actualizaron las imágenes de la galería, se corrigió en `index.html` la referencia al archivo `jquery-min.js` para recuperar las tarjetas, y se reforzó `remoto.js` para cargar automáticamente el catálogo y mostrar el menú local si falla la petición. El diseño mantiene la paleta amarilla y roja del negocio.
