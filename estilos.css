@@ -689,3 +689,77 @@ aside p {
   color: var(--color-texto);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
+#remoto { margin-top: var(--espacio-lg); }
+#remoto button { margin-right: 0.5rem; margin-bottom: var(--espacio); }
+
+#estado {
+  min-height: 1.5em;
+  padding: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.cargando { color: var(--color-suave); }
+.cargando::before {
+  content: "●";
+  color: var(--color-principal);
+  margin-right: 0.4rem;
+  animation: latir 1s ease-in-out infinite;
+}
+@keyframes latir {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+.ok    { color: var(--color-principal); font-weight: 600; }
+
+.error {
+  color: #8a2b12;
+  background: #fdeee8;
+  border-left: 3px solid var(--color-acento);
+  padding: 0.5rem 0.8rem;
+  font-weight: 500;
+}
+.error::before { content: "⨯ "; }
+
+#lista-remota {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: var(--espacio);
+  align-items: start;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cargando::before { animation: none; }
+}
+
+.tema-oscuro {
+  --color-principal:  #ffffff;
+  --color-acento:     #d9f506;
+  --color-texto:      #e6edf3;
+  --color-suave:      #9aa8b4;
+  --color-fondo:      #16202a;
+  --color-superficie: #090d11;
+  --borde:            #33465a;
+}
+
+body { transition: background-color .25s, color .25s; }
+.tema-oscuro button, .tema-oscuro th { color: var(--color-fondo); }
+.tema-oscuro #filtros button.activo { color: var(--color-fondo); }
+
+.tema-oscuro .error {
+  background: #3a1d14;
+  color: #f0b9a4;
+}
+
+#preferencias, #ubicacion { margin-top: var(--espacio-lg); }
+#preferencias button, #ubicacion button { margin-right: 0.5rem; }
+#preferencias label { display: inline; margin-right: 0.4rem; }
+#preferencias select { width: auto; display: inline-block; }
+
+#tema-toggle[aria-pressed="true"] {
+  background: var(--color-acento);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body { transition: none; }
+}

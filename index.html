@@ -23,6 +23,7 @@
         <li><a href="#productos">Nuestro menú</a></li>
         <li><a href="#horarios">Horarios</a></li>
         <li><a href="#pedido">Hacer pedido</a></li>
+        <li><a href="#preferencias">Preferencias</a></li>
         <li><a href="#contacto">Contacto y dirección</a></li>
       </ul>
     </nav>
@@ -60,6 +61,19 @@
            <img src="cocaquina.jpeg" alt="Gaseosas" width="600" height="400">
         <figcaption>Pollitos en el mejor momento del día.</figcaption>
       </figure>
+    </section>
+
+    <section id="preferencias" aria-labelledby="titulo-preferencias">
+      <h2 id="titulo-preferencias">Preferencias</h2>
+      <p>Guarda tus preferencias en este navegador. No se almacenan datos personales.</p>
+      <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
+      <label for="orden">Ordenar productos por:</label>
+      <select id="orden" aria-describedby="estado-prefs">
+        <option value="nombre">Nombre (A-Z)</option>
+        <option value="precio">Precio (menor a mayor)</option>
+      </select>
+      <button type="button" id="olvidar">Olvidar preferencias</button>
+      <p id="estado-prefs" role="status" aria-live="polite"></p>
     </section>
 
     <section id="horarios">
@@ -149,11 +163,7 @@
           <p>
             <label for="nombre">Nombre completo</label>
             <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-          </p>
-          <p>
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </p>
+          </p>  
           <p>
             <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
@@ -197,6 +207,13 @@
         <button type="submit">Enviar pedido</button>
       </form>
     </section>
+    <!-- ── ZONA DEL DÍA 13: DÓNDE ESTÁ EL USUARIO ───────────────────── -->
+    <section id="ubicacion">
+      <h2>¿Estás cerca?</h2>
+      <p>Calculamos la distancia hasta el local. Tu ubicación no sale de tu navegador.</p>
+      <button type="button" id="ubicarme">Calcular mi distancia</button>
+      <p id="estado-ubicacion" role="status" aria-live="polite"></p>
+    </section>
 
     <!-- Zona del día 12: datos que llegan por la red -->
     <section id="remoto">
@@ -238,6 +255,7 @@
   <script src="jquery-panel.js"></script>
   <script src="jquery-comparado.js"></script>
   <script src="remoto.js"></script>
+  <script src="preferencias.js"></script>
 </body>
 
 </html>

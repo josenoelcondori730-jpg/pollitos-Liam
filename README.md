@@ -87,5 +87,9 @@ Se incorporó la librería **jQuery** para simplificar y optimizar la manipulaci
 ### 5. Demostración y Comparativa (`jquery-comparado.js`)
 - Se implementó una sección interactiva en la página y se completaron los bloques de espera al DOM y manipulación de clases, comparando Vanilla JS contra jQuery.
 
+## Laboratorio 4: Preferencias y ubicación
 
- 
+El archivo `preferencias.js` permite guardar en `localStorage` el tema claro u oscuro y el orden del catálogo por nombre o precio. Los productos respetan ese orden junto con la búsqueda y el filtro de categoría; el botón **Olvidar preferencias** restaura los valores predeterminados.
+
+La sección de ubicación solicita permiso explícito del navegador y calcula localmente la distancia aproximada al local. La ubicación no se guarda ni se envía al servidor. Para usar esta función, sirve la página desde `localhost` o desde un sitio con HTTPS, ya que el navegador restringe la geolocalización en contextos no seguros.
+

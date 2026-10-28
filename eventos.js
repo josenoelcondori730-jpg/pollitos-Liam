@@ -15,6 +15,12 @@ function actualizar() {
     return coincideCategoria && coincideTexto;
   });
 
+  if (typeof preferencias !== "undefined" && preferencias.orden === "precio") {
+    visibles.sort((a, b) => a.precio - b.precio || a.nombre.localeCompare(b.nombre));
+  } else {
+    visibles.sort((a, b) => a.nombre.localeCompare(b.nombre));
+  }
+
   render(visibles);
 
   // Mensaje accesible y contador con jQuery
