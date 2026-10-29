@@ -58,6 +58,7 @@ document.querySelector("#tema-toggle").addEventListener("click", () => {
   preferencias.tema = preferencias.tema === "oscuro" ? "claro" : "oscuro";
   guardarPreferencias(preferencias);
   aplicarPreferencias();
+  document.dispatchEvent(new Event("tema-cambiado"));
 });
 
 document.querySelector("#orden").addEventListener("change", (event) => {
@@ -85,7 +86,7 @@ document.querySelector("#olvidar").addEventListener("click", () => {
 // ── 5. LO QUE NUNCA VA EN localStorage ──────────────────────────────────
 
 // ── 6. GEOLOCATION ──────────────────────────────────────────────────────
-const LOCAL = { lat: -16.5, lng: -68.15 };
+const LOCAL = { lat: -16.9311131, lng: -68.2476208 };
 
 function distanciaKm(lat1, lng1, lat2, lng2) {
   const R = 6371;

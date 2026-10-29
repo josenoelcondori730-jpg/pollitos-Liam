@@ -27,6 +27,7 @@
         <li><a href="#contacto">Contacto y dirección</a></li>
       </ul>
     </nav>
+    <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
   </header>
   <div class="encabezado-principal">
     <img src="logo-pollos-liam.png" alt="Logo de Pollos Liam" class="logo-header" width="500" height="400">
@@ -35,6 +36,14 @@
   <main>
     <section id="productos">
       <h2>Nuestro menú</h2>
+      <div class="control-orden">
+        <label for="orden">Ordenar productos por:</label>
+        <select id="orden" aria-describedby="estado-prefs">
+          <option value="nombre">Nombre (A-Z)</option>
+          <option value="precio">Precio (menor a mayor)</option>
+        </select>
+      </div>
+      <p id="estado-prefs" role="status" aria-live="polite"></p>
 
       <!-- Controles para el buscador y filtros gestionados por eventos.js -->
       <div class="controles" role="search">
@@ -63,6 +72,29 @@
       </figure>
     </section>
 
+    <section id="tablero-zona" aria-labelledby="titulo-tablero">
+      <h2 id="titulo-tablero">Arma tu menú de Pollitos Liam</h2>
+      <p id="ayuda-tablero">
+        Agrega todas las unidades que quieras de los productos disponibles.
+        Usa el botón − para restar una unidad o Quitar para eliminar el producto
+        de Mi menú.
+      </p>
+
+      <div id="tablero" aria-describedby="ayuda-tablero">
+        <div class="columna">
+          <h3>Menú de Pollitos Liam</h3>
+          <ul id="lista-menu-pollitos" class="lista-menu"></ul>
+        </div>
+        <div class="columna">
+          <h3>Mi menú</h3>
+          <ul id="lista-mi-menu" class="lista-menu"></ul>
+          <p id="total-mi-menu" class="total"></p>
+        </div>
+      </div>
+
+      <p id="estado-menu-cliente" role="status" aria-live="polite"></p>
+    </section>
+
         <!-- UBICACIÓN DE POLLITOS LIAM -->
         <section id="ubicacion">
             <h2> Visítanos en Pollitos liam
@@ -70,33 +102,24 @@
             <p>¡Te esperamos para disfrutar nuestros platos!</p>
 
             <div class="mapa">
-                <iframe src="https://goo.gl/maps/bmtfA2iUBjTMVZqW8" width="100%"
+                <iframe src="https://goo.gl/maps/AAuofR1QWnhJLzm59" width="100%"
                     height="350" style="border: 0;" allowfullscreen loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade" title="Ubicación de pollos liam en Google Maps">
                 </iframe>
             </div>
-
             <p class="direccion-tienda">
                 pollitos liam — Nuestra sucursal
             </p>
-
             <a class="boton-ubicacion"
-                href="https://goo.gl/maps/bmtfA2iUBjTMVZqW8 " target="_blank"
+                href="https://goo.gl/maps/AAuofR1QWnhJLzm59" target="_blank"
                 rel="noopener noreferrer">
                 Cómo llegar a nuestra tienda
             </a>
         </section>
     <section id="preferencias" aria-labelledby="titulo-preferencias">
       <h2 id="titulo-preferencias">Preferencias</h2>
-      <p>Guarda tus preferencias en este navegador. No se almacenan datos personales.</p>
-      <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
-      <label for="orden">Ordenar productos por:</label>
-      <select id="orden" aria-describedby="estado-prefs">
-        <option value="nombre">Nombre (A-Z)</option>
-        <option value="precio">Precio (menor a mayor)</option>
-      </select>
+      <p>El tema y el orden se guardan en este navegador. No se almacenan datos personales.</p>
       <button type="button" id="olvidar">Olvidar preferencias</button>
-      <p id="estado-prefs" role="status" aria-live="polite"></p>
     </section>
 
     <section id="horarios">
@@ -279,6 +302,7 @@
   <script src="jquery-comparado.js"></script>
   <script src="remoto.js"></script>
   <script src="preferencias.js"></script>
+  <script src="tablero.js"></script>
 </body>
 
 </html>

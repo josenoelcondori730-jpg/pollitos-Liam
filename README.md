@@ -64,32 +64,38 @@ Se incluyó una validación lógica con la API de validación nativa (`reportVal
 Se diseñó la lógica para el cálculo y presentación dinámica del stock de pollos en vitrina reflejado directamente en el encabezado.
 Se crearon funciones de orden superior, funciones flecha y closures contadores (`crearContador`) para registrar las ventas y pedidos de forma modular.
 
-## Laboratorio 3: Integración de la Librería jQuery
+## Laboratorio 3 archivos añadidos
 
 Se incorporó la librería **jQuery** para simplificar y optimizar la manipulación del DOM, gestión de eventos y encadenamiento (chaining):
 
-### 1. Inclusión de la Librería
+1. Inclusión de la Librería
 - Se añadió la librería `jquery.min.js` (versión 3.7.1) al proyecto y se enlazó en `index.html` antes de los scripts de la aplicación.
 
-### 2. Notificación de Stock (`app.js`)
+2. Notificación de Stock (`app.js`)
 - Se implementó la selección y modificación del texto de stock con `$(function() { $("#aviso-stock").text(...); });`.
 
-### 3. Renderizado Dinámico de Tarjetas (`render.js`)
+3. Renderizado Dinámico de Tarjetas (`render.js`)
 - Selección simplificada con `$contenedor = $("#lista-productos")` y `$titulos = $("h2")`.
 - Creación de elementos con chaining: `$("<article>").addClass("tarjeta").toggleClass("agotado", !p.disponible).attr("data-nombre", p.nombre).html(...)`.
 - Vaciado e inserción del catálogo con `$contenedor.empty()` y `$contenedor.append(...)`.
 
-### 4. Búsqueda, Filtrado y Formulario (`eventos.js`)
+4. se añdio el archivo Búsqueda, Filtrado y Formulario (`eventos.js`)
 - Búsqueda en tiempo real con `$buscador.on("input", ...)`.
 - Delegación de eventos ágil en filtros con `$filtros.on("click", "button", ...)`.
 - Control y validación del formulario con `$formulario.on("submit", ...)` y `$fecha.one("input", ...)`.
 
-### 5. Demostración y Comparativa (`jquery-comparado.js`)
+5. se añdio el archivo Demostración y Comparativa (`jquery-comparado.js`)
 - Se implementó una sección interactiva en la página y se completaron los bloques de espera al DOM y manipulación de clases, comparando Vanilla JS contra jQuery.
-
-## Laboratorio 4: Preferencias y ubicación
-
-El archivo `preferencias.js` permite guardar en `localStorage` el tema claro u oscuro y el orden del catálogo por nombre o precio. Los productos respetan ese orden junto con la búsqueda y el filtro de categoría; el botón **Olvidar preferencias** restaura los valores predeterminados.
-
+6. se añdio el archivo `jquery-panel.js`
+7. se añdio el archivo `jquery-comparado.js`
+8. se añdio el archivo `jquery-3.7.1.min.js`
+9. se añdio el archivo `preferencias.js` que permite guardar en `localStorage` el tema claro u oscuro y el orden del catálogo por nombre o precio; el botón **Olvidar preferencias** restaura los valores predeterminados.
 La sección de ubicación solicita permiso explícito del navegador y calcula localmente la distancia aproximada al local. La ubicación no se guarda ni se envía al servidor. Para usar esta función, sirve la página desde `localhost` o desde un sitio con HTTPS, ya que el navegador restringe la geolocalización en contextos no seguros.
 
+10. en `index.html`  se añadio la ubicacion de la sucursal mostrando un mapa desde googgle maps;   `$class="boton-ubicacion"`, "como llegar a nuestra tienda"
+
+11.  se añdio el archivo Tablero de planificación `tablero.js` presenta el **Menú de Pollitos Liam** y **Mi menú** para que cada cliente agregue  los platos y productos que desee . El cliente puede restar unidades o quitar un producto completo; el total se calcula según las cantidades. La selección se mantiene mientras la página está abierta; el catálogo y el stock no se modifican.
+
+El punto 6 (`jquery-panel.js`) añade interacción a la información del local: permite abrir y cerrar las respuestas del acordeón de preguntas frecuentes y mostrar avisos de forma dinámica. El punto 7 (`jquery-comparado.js`) presenta una comparación interactiva entre JavaScript y jQuery para observar distintas formas de manipular elementos de la página.
+
+El punto 8 (`jquery-3.7.1.min.js`) incorpora la librería jQuery, utilizada por los scripts del proyecto para seleccionar elementos, gestionar eventos y actualizar el contenido de la página.
