@@ -50,13 +50,4 @@ $(function () {
     }
   );
 
-  // 4. Efecto sutil sobre el bloque aside con jQuery
-  $("aside")
-    .css("cursor", "pointer")
-    .on("mouseenter", function () {
-      $(this).addClass("resaltado");
-    })
-    .on("mouseleave", function () {
-      $(this).removeClass("resaltado");
-    });
 });

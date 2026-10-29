@@ -69,16 +69,19 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: var(--espacio);
-  padding: var(--espacio) max(12rem, calc((100% - 76rem) / 2 + 12rem)) var(--espacio)
+  padding: var(--espacio) max(22rem, calc((100% - 76rem) / 2 + 22rem)) var(--espacio)
     max(var(--espacio), calc((100% - 76rem) / 2));
   border-bottom: 4px solid var(--color-dorado);
   background: var(--color-superficie);
   box-shadow: 0 2px 12px rgba(31, 41, 51, 0.08);
 }
-#tema-toggle {
+.controles-header {
   position: absolute;
   top: var(--espacio);
   right: max(var(--espacio), calc((100% - 76rem) / 2));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 header h1,
 header p {
@@ -117,12 +120,13 @@ nav a:hover {
   color: var(--color-acento);
 }
 .logo-header {
-  height: 120px;
-  width: auto;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .encabezado-principal {
   text-align: center;
-  padding: var(--espacio) var(--espacio);
+  padding: 0;
   background: #fff0c2;
   border-bottom: 1px solid var(--borde);
 }
@@ -535,9 +539,16 @@ aside p {
     align-items: flex-start;
     padding: calc(var(--espacio) + 3.25rem) var(--espacio) var(--espacio);
   }
-  #tema-toggle {
+  .controles-header {
     top: var(--espacio);
     right: var(--espacio);
+    flex-direction: row;
+    gap: 0.25rem;
+  }
+  .controles-header button {
+    padding-inline: 0.65rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
   header h1,
   header > p,
@@ -548,7 +559,7 @@ aside p {
     padding-block: var(--espacio);
   }
   .logo-header {
-    height: 96px;
+    height: auto;
   }
   main > section:not(#productos) {
     padding: var(--espacio);
@@ -749,8 +760,8 @@ aside p {
   --color-acento:     #d9f506;
   --color-texto:      #e6edf3;
   --color-suave:      #9aa8b4;
-  --color-fondo:      #16202a;
-  --color-superficie: #5a98d6e8;
+  --color-fondo:      #000000;
+  --color-superficie: #171e26e8;
   --borde:            #33465a;
 }
 

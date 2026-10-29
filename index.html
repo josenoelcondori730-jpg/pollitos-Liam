@@ -27,10 +27,13 @@
         <li><a href="#contacto">Contacto y dirección</a></li>
       </ul>
     </nav>
-    <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
+    <div class="controles-header">
+      <button type="button" id="tema-toggle" aria-pressed="false">Modo oscuro</button>
+      <button type="button" id="olvidar">Olvidar preferencias</button>
+    </div>
   </header>
   <div class="encabezado-principal">
-    <img src="logo-pollos-liam.png" alt="Logo de Pollos Liam" class="logo-header" width="500" height="400">
+    <img src="sucursal broaster.jpeg" alt="Logo de Pollos Liam" class="logo-header" width="1000" height="800">
   </div>
 
   <main>
@@ -116,11 +119,10 @@
                 Cómo llegar a nuestra tienda
             </a>
         </section>
-    <section id="preferencias" aria-labelledby="titulo-preferencias">
-      <h2 id="titulo-preferencias">Preferencias</h2>
-      <p>El tema y el orden se guardan en este navegador. No se almacenan datos personales.</p>
-      <button type="button" id="olvidar">Olvidar preferencias</button>
-    </section>
+     <!--<section id="preferencias" aria-labelledby="titulo-preferencias">
+      <h2 id="titulo-preferencias"></h2>
+      <p></p>
+    </section>-->
 
     <section id="horarios">
       <h2>Horarios de atención</h2>
@@ -261,22 +263,7 @@
       <p id="estado-ubicacion" role="status" aria-live="polite"></p>
     </section>
 
-    <!-- Zona del día 12: datos que llegan por la red -->
-    <section id="remoto">
-      <h2>Catálogo del proveedor</h2>
-      <p>Consulta los productos recibidos desde el catálogo del proveedor.</p>
-
-      <div class="controles-remotos">
-        <button type="button" id="cargar-fetch">Cargar con fetch</button>
-        <button type="button" id="cargar-jquery">Cargar con jQuery</button>
-        <button type="button" id="cargar-roto">Probar un error</button>
-      </div>
-
-      <p id="estado" role="status" aria-live="polite"></p>
-      <div id="lista-remota"></div>
-    </section>
   </main>
-
   <aside>
     <h2>¿Sabías que...?</h2>
     <p>Vendemos los pollos más grandes.</p>
