@@ -2,6 +2,7 @@ const listaMenuPollitos = document.querySelector("#lista-menu-pollitos");
 const listaMiMenu = document.querySelector("#lista-mi-menu");
 const estadoMenuCliente = document.querySelector("#estado-menu-cliente");
 const totalMiMenu = document.querySelector("#total-mi-menu");
+const botonPedirMenu = document.querySelector("#pedir-menu");
 const productosDeMiMenu = new Map();
 
 function renderMenuCliente() {
@@ -95,6 +96,7 @@ function renderMenuCliente() {
 
   totalMiMenu.textContent =
     `${totalUnidades} ${totalUnidades === 1 ? "unidad" : "unidades"} · Total: Bs ${total.toFixed(2)}`;
+  botonPedirMenu.disabled = productosDeMiMenu.size === 0;
 }
 
 document.querySelector("#tablero").addEventListener("click", (event) => {
@@ -136,6 +138,38 @@ document.querySelector("#tablero").addEventListener("click", (event) => {
   }
 
   renderMenuCliente();
+});
+
+botonPedirMenu.addEventListener("click", () => {
+  if (productosDeMiMenu.size === 0) return;
+
+  const lineas = [...productosDeMiMenu].map(
+    ([nombreProducto, cantidad]) => `- ${nombreProducto} × ${cantidad}`
+  );
+  const total = [...productosDeMiMenu].reduce((suma, [nombreProducto, cantidad]) => {
+    const producto = productos.find((item) => item.nombre === nombreProducto);
+    return suma + (producto ? producto.precio * cantidad : 0);
+  }, 0);
+  const detalle = `Detalle del menú:\n${lineas.join("\n")}\nTotal estimado: Bs ${total.toFixed(2)}`;
+  const selectorProducto = document.querySelector("#producto");
+  let opcionMenu = selectorProducto.querySelector('option[value="menu-personalizado"]');
+
+  if (!opcionMenu) {
+    opcionMenu = new Option("Menú personalizado", "menu-personalizado");
+    selectorProducto.add(opcionMenu);
+  }
+
+  selectorProducto.value = opcionMenu.value;
+  document.querySelector("#cantidad").value = "1";
+  document.querySelector("#detalle-menu").value = detalle;
+  document.querySelector("#detalle-menu-contenedor").hidden = false;
+
+  const contenidoPedido = document.querySelector("#contenido-pedido");
+  const botonPedido = document.querySelector('[aria-controls="contenido-pedido"]');
+  contenidoPedido.hidden = false;
+  botonPedido.setAttribute("aria-expanded", "true");
+  contenidoPedido.scrollIntoView({ behavior: "smooth", block: "start" });
+  estadoMenuCliente.textContent = "Tu menú se agregó al formulario de pedido.";
 });
 
 renderMenuCliente();

@@ -3,8 +3,8 @@ const negocio = "Pollos Liam";
 const anioFundacion = 1998;
 
 // ── 2. VARIABLES DE ESTADO ──────────────────────────────────────────────
-let pollosEnVitrina = 40;
-pollosEnVitrina = 35;
+let platosparadegustarr= 40;
+let platoparadegustar  = 35;
 
 // ── 3. TIPOS Y PRECIOS BASE ─────────────────────────────────────────────
 const precioPollo = 17;
@@ -13,7 +13,7 @@ const promocionDelDia = null;
 let telefono = "63050938";
 
 // ── 4. TEMPLATE LITERAL ─────────────────────────────────────────────────
-const resumen = `${negocio} abrió en ${anioFundacion} y hoy quedan ${pollosEnVitrina} pollos.`;
+const resumen = `${negocio} abrió en ${anioFundacion} y hoy quedan ${platosparadegustarr} platos.`;
 console.log(resumen);
 
 // ── 5. INTEGRACIÓN Y CONTROL TOTAL DEL DOM CON JQUERY ───────────────────
@@ -23,7 +23,7 @@ $(function () {
   // 1. Inyección de aviso de stock dinámico con animación fadeIn
   $("#aviso-stock")
     .hide()
-    .html(`🍗 <strong>Aviso:</strong> Hoy quedan <em>${pollosEnVitrina} pollos</em> disponibles en vitrina.`)
+    .html(`🍗 <strong>Aviso:</strong> Hoy quedan <em>${platosparadegustarr} platos</em>para degustar.`)
     .fadeIn(700);
 
   // 2. Desplazamiento suave (smooth scroll) en todos los enlaces de navegación

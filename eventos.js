@@ -74,10 +74,31 @@ $(function () {
   // Render inicial al cargar el DOM
   actualizar();
 
+  $(".boton-desplegable, .boton-galeria").on("click", function () {
+    const boton = this;
+    const contenido = document.getElementById(boton.getAttribute("aria-controls"));
+
+    if (!contenido) {
+      console.error("No se encontró el contenido de la sección:", boton.getAttribute("aria-controls"));
+      return;
+    }
+
+    const expandido = boton.getAttribute("aria-expanded") === "true";
+    boton.setAttribute("aria-expanded", String(!expandido));
+    contenido.hidden = expandido;
+  });
+
   // Escuchar entrada en tiempo real en el buscador con .on("input")
   $buscador.on("input", function () {
     textoBuscado = $.trim($(this).val());
     actualizar();
+  });
+
+  $("#producto").on("change", function () {
+    if (this.value !== "menu-personalizado") {
+      $("#detalle-menu-contenedor").prop("hidden", true);
+      $("#detalle-menu").val("");
+    }
   });
 
   // Delegación de eventos ágil en la botonera de categorías
@@ -128,14 +149,20 @@ $(function () {
     console.log("Pedido procesado y enviado con jQuery:", datos);
 
     // Notificación animada de éxito con jQuery (.hide() y .fadeIn())
+    const nombrePedido = datos.producto === "menu-personalizado"
+      ? "menú personalizado"
+      : datos.producto;
+    const detalleMenu = datos.detalleMenu ? ` ${datos.detalleMenu}` : "";
     $resultado
       .hide()
-      .html(`✅ <strong>¡Pedido registrado!</strong> Gracias <em>${datos.nombre || "cliente"}</em>, tu orden de <strong>${datos.cantidad}x ${datos.producto}</strong> está en preparación. Nos comunicaremos al teléfono indicado.`)
+      .text(`✅ ¡Pedido registrado! Gracias ${datos.nombre || "cliente"}, tu orden de ${datos.cantidad}x ${nombrePedido}.${detalleMenu} Está en preparación. Nos comunicaremos al teléfono indicado.`)
       .css({ color: "#2d6a4f", backgroundColor: "#d8f3dc", padding: "0.8rem", borderRadius: "4px" })
       .fadeIn(500);
 
     // Limpieza de campos del formulario
     formElement.reset();
+    $("#producto option[value='menu-personalizado']").remove();
+    $("#detalle-menu-contenedor").prop("hidden", true);
   });
 });
 

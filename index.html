@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +22,7 @@
         <li><a href="#productos">Nuestro menú</a></li>
         <li><a href="#horarios">Horarios</a></li>
         <li><a href="#pedido">Hacer pedido</a></li>
-        <li><a href="#preferencias">Preferencias</a></li>
+        <!--<li><a href="#preferencias">Preferencias</a></li>  -->
         <li><a href="#contacto">Contacto y dirección</a></li>
       </ul>
     </nav>
@@ -33,12 +32,18 @@
     </div>
   </header>
   <div class="encabezado-principal">
-    <img src="sucursal broaster.jpeg" alt="Logo de Pollos Liam" class="logo-header" width="1000" height="800">
+    <img src="tienda.jpeg" alt="Logo de Pollos Liam" class="logo-header" width="1000" height="800">
   </div>
 
   <main>
     <section id="productos">
-      <h2>Nuestro menú</h2>
+      <h2 class="titulo-desplegable">
+        <button type="button" class="boton-desplegable" aria-expanded="true" aria-controls="contenido-productos">
+          Productos y menú
+        </button>
+      </h2>
+      <div id="contenido-productos">
+      <h3>Nuestro menú</h3>
       <div class="control-orden">
         <label for="orden">Ordenar productos por:</label>
         <select id="orden" aria-describedby="estado-prefs">
@@ -66,17 +71,86 @@
 
       <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
       <div id="lista-productos"></div>
-
-      <figure>
+      <button type="button" id="galeria-toggle" class="boton-galeria" aria-expanded="false"
+        aria-controls="galeria-productos">Galería</button>
+      <figure id="galeria-productos" hidden>
         <img src="broaster.jpeg" alt="Platos de pollo de Pollos Liam" width="600" height="400">
         <img src="spiedo.jpeg" alt="Más platos de pollo de Pollos Liam" width="600" height="400">
-           <img src="cocaquina.jpeg" alt="Gaseosas" width="600" height="400">
+        <img src="cocaquina.jpeg" alt="Gaseosas" width="600" height="400">
         <figcaption>Pollitos en el mejor momento del día.</figcaption>
       </figure>
+      </div>
+    </section>
+
+    <section id="pedido">
+      <h2 class="titulo-desplegable">
+        <button type="button" class="boton-desplegable" aria-expanded="true" aria-controls="contenido-pedido">
+          Hacer un pedido
+        </button>
+      </h2>
+      <div id="contenido-pedido">
+      <form action="/pedido" method="post">
+        <fieldset>
+          <legend>Tus datos</legend>
+          <p>
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+          </p>
+          <p>
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
+              title="7 u 8 dígitos, sin espacios">
+          </p>
+        </fieldset>
+        <fieldset>
+          <legend>Tu pedido</legend>
+          <p>
+            <label for="producto">Producto</label>
+            <select id="producto" name="producto" required>
+              <option value="">Elige uno</option>
+              <option value="broaster">Combo broaster</option>
+              <option value="spiedo">Spiedo mixto</option>
+              <option value="milanesa">Milanesa</option>
+              <option value="Alitas de pollo">Alitas de pollo</option>
+            </select>
+          </p>
+          <p>
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
+          </p>
+          <p id="detalle-menu-contenedor" hidden>
+            <label for="detalle-menu">Detalle del menú armado</label>
+            <textarea id="detalle-menu" name="detalleMenu" rows="4" readonly></textarea>
+          </p>
+          <p>
+            <label for="fecha">Fecha de entrega</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </p>
+          <p>
+            <label for="hora">Hora de entrega</label>
+            <input type="time" id="hora" name="hora" required>
+          </p>
+          <p>
+            <label for="notas">Alguna indicación</label>
+            <textarea id="notas" name="notas" rows="3"></textarea>
+          </p>
+          <p>
+            <input type="checkbox" id="terminos" name="terminos" required>
+            <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
+          </p>
+        </fieldset>
+        <button type="submit">Enviar pedido</button>
+      </form>
+      </div>
     </section>
 
     <section id="tablero-zona" aria-labelledby="titulo-tablero">
-      <h2 id="titulo-tablero">Arma tu menú de Pollitos Liam</h2>
+      <h2 id="titulo-tablero" class="titulo-desplegable">
+        <button type="button" class="boton-desplegable" aria-expanded="true" aria-controls="contenido-tablero">
+          Arma tu menú de Pollitos Liam
+        </button>
+      </h2>
+      <div id="contenido-tablero">
       <p id="ayuda-tablero">
         Agrega todas las unidades que quieras de los productos disponibles.
         Usa el botón − para restar una unidad o Quitar para eliminar el producto
@@ -95,73 +169,94 @@
         </div>
       </div>
 
+      <button type="button" id="pedir-menu" disabled>Pedir este menú</button>
       <p id="estado-menu-cliente" role="status" aria-live="polite"></p>
+      </div>
     </section>
 
-        <!-- UBICACIÓN DE POLLITOS LIAM -->
-        <section id="ubicacion">
-            <h2> Visítanos en Pollitos liam
-            </h2>
-            <p>¡Te esperamos para disfrutar nuestros platos!</p>
-
-            <div class="mapa">
-                <iframe src="https://goo.gl/maps/AAuofR1QWnhJLzm59" width="100%"
-                    height="350" style="border: 0;" allowfullscreen loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade" title="Ubicación de pollos liam en Google Maps">
-                </iframe>
-            </div>
-            <p class="direccion-tienda">
-                pollitos liam — Nuestra sucursal
-            </p>
-            <a class="boton-ubicacion"
-                href="https://goo.gl/maps/AAuofR1QWnhJLzm59" target="_blank"
-                rel="noopener noreferrer">
-                Cómo llegar a nuestra tienda
-            </a>
-        </section>
+    <section id="ubicacion">
+      <h2 class="titulo-desplegable">
+        <button type="button" class="boton-desplegable" aria-expanded="true" aria-controls="contenido-ubicacion">
+          Ubicación de la sucursal
+        </button>
+      </h2>
+      <div id="contenido-ubicacion">
+      <div class="ubicacion-columnas">
+        <div class="ubicacion-sucursal">
+          <h2>Visítanos en Pollitos Liam</h2>
+          <p>¡Te esperamos para disfrutar nuestros platos!</p>
+          <div class="mapa">
+            <iframe
+              width="100%"
+              height="350"
+              src="https://maps.google.com/maps?q=-16.931113,-68.247621&z=18&output=embed"
+              title="Mapa de la sucursal de Pollitos Liam"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+          <p class="direccion-tienda">Pollitos Liam — Nuestra sucursal</p>
+          <a class="boton-ubicacion"
+            href="https://goo.gl/maps/AAuofR1QWnhJLzm59" target="_blank"
+            rel="noopener noreferrer">
+            Cómo llegar a nuestra tienda
+          </a>
+        </div>
+        <div class="ubicacion-cercania">
+          <h2>¿Estás cerca?</h2>
+          <p>Calculamos la distancia hasta el local. Tu ubicación no sale de tu navegador.</p>
+          <button type="button" id="ubicarme">Calcular mi distancia</button>
+          <p id="estado-ubicacion" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+      </div>
+    </section>
      <!--<section id="preferencias" aria-labelledby="titulo-preferencias">
       <h2 id="titulo-preferencias"></h2>
       <p></p>
     </section>-->
 
     <section id="horarios">
-      <h2>Horarios de atención</h2>
-      <p>Solo de lunes a viernes.</p>
+      <h2 class="titulo-desplegable">
+        <button type="button" class="boton-desplegable" aria-expanded="true" aria-controls="contenido-horarios">
+          Horarios de atención
+        </button>
+      </h2>
+      <div id="contenido-horarios">
+      <p>lunes a sabado</p>
+      <p>De 11:00 am a 21:00 pm</p>
 
       <table>
         <caption>Precios por combo y disponibilidad</caption>
         <thead>
           <tr>
             <th scope="col">Combo</th>
-            <th scope="col">Precio</th>
             <th scope="col">Disponible</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>Broaster</td>
-            <td>Bs 17</td>
-            <td>Todos los días</td>
+            <td>lunes a sabado</td>
           </tr>
           <tr>
             <td>Spiedo</td>
-            <td>Bs 17</td>
-            <td>Todos los días</td>
+            <td>lunes a sabado</td>
           </tr>
           <tr>
             <td>Milanesa</td>
-            <td>Bs 15</td>
-            <td>Lunes a viernes</td>
+            <td>mayormente fin de semana</td>
           </tr>
         </tbody>
       </table>
+      </div>
     </section>
 
     <!-- Panel informativo: jquery-panel.js usa resaltar() sobre su h2 -->
     <section id="panel">
       <h2>Información del local</h2>
-      <p>Estamos ubicados en Av. La Paz, Colquencha. Atendemos de lunes a viernes de 11:00 a 21:00. ¡Te esperamos con el
-        mejor pollo!</p>
+      <p>Estamos ubicados en Av. La Paz, Colquencha. Atendemos de lunes a sabado de 11:00 a 21:00. ¡Te esperamos con el
+        mejor pollitooo...!!!</p>
 
       <!-- Acordeón de preguntas frecuentes -->
       <div id="acordeon">
@@ -180,7 +275,7 @@
         <div class="item-acordeon">
           <button class="titulo" aria-expanded="false">¿Con cuánto tiempo debo hacer mi pedido?</button>
           <div class="cuerpo">
-            <p>Para pedidos de más de 5 pollos, te pedimos reservar con al menos 24 horas de anticipación llamando al 63050938.</p>
+            <p>Para pedidos de más de 7 platos, te pedimos reservar con al menos 24 horas de anticipación llamando al 63050938.</p>
           </div>
         </div>
         <div class="item-acordeon">
@@ -202,71 +297,26 @@
         </ul>
       </div>
     </section>
+        <!-- <figure>
+          <img src="condorito.png"
+               srcset="condorito-300.png 300w,
+                       condorito.png 600w,
+                       condorito-900.png 900w"
+               sizes="(min-width: 60rem) 40rem, 100vw"
+               alt="Vitrina con panes recién horneados ordenados en bandejas"
+               width="600" height="400"
+               loading="lazy"
+               decoding="async">
+          <figcaption>La vitrina a primera hora de la mañana.</figcaption>
+        </figure>-->
+      </section>
 
-    <section id="pedido">
-      <h2>Hacer un pedido</h2>
-      <form action="/pedido" method="post">
-        <fieldset>
-          <legend>Tus datos</legend>
-          <p>
-            <label for="nombre">Nombre completo</label>
-            <input type="text" id="nombre" name="nombre" autocomplete="name" required>
-          </p>  
-          <p>
-            <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9]{7,8}"
-              title="7 u 8 dígitos, sin espacios">
-          </p>
-        </fieldset>
-        <fieldset>
-          <legend>Tu pedido</legend>
-
-          <p>
-            <label for="producto">Producto</label>
-            <select id="producto" name="producto" required>
-              <option value="">Elige uno</option>
-              <option value="broaster">Combo broaster</option>
-              <option value="spiedo">Spiedo mixto</option>
-              <option value="milanesa">Milanesa</option>
-              <option value="Alitas de pollo">Alitas de pollo</option>
-            </select>
-          </p>
-          <p>
-            <label for="cantidad">Cantidad</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" max="100" value="1" required>
-          </p>
-          <p>
-            <label for="fecha">Fecha de entrega</label>
-            <input type="date" id="fecha" name="fecha" required>
-          </p>
-          <p>
-            <label for="hora">Hora de entrega</label>
-            <input type="time" id="hora" name="hora" required>
-          </p>
-          <p>
-            <label for="notas">Alguna indicación</label>
-            <textarea id="notas" name="notas" rows="3"></textarea>
-          </p>
-          <p>
-            <input type="checkbox" id="terminos" name="terminos" required>
-            <label for="terminos">Acepto que el pedido se confirma por teléfono</label>
-          </p>
-        </fieldset>
-        <button type="submit">Enviar pedido</button>
-      </form>
-    </section>
-    <!-- ── ZONA DEL DÍA 13: DÓNDE ESTÁ EL USUARIO ───────────────────── -->
-    <section id="ubicacion">
-      <h2>¿Estás cerca?</h2>
-      <p>Calculamos la distancia hasta el local. Tu ubicación no sale de tu navegador.</p>
-      <button type="button" id="ubicarme">Calcular mi distancia</button>
-      <p id="estado-ubicacion" role="status" aria-live="polite"></p>
-    </section>
+   
 
   </main>
   <aside>
     <h2>¿Sabías que...?</h2>
-    <p>Vendemos los pollos más grandes.</p>
+    <p>Por la compra de 3 platos y papas fritas extras, te regalamos una bebida.</p>
   </aside>
   <footer id="contacto">
     <h2>Contacto</h2>

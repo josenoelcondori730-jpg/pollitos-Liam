@@ -4,6 +4,9 @@
 *::after {
   box-sizing: border-box;
 }
+[hidden] {
+  display: none !important;
+}
 /* ── 2. CUSTOM PROPERTIES ── tema Pollos Liam ──────────────────────────── */
 :root {
   --color-principal: #fe0000;
@@ -198,6 +201,19 @@ fieldset {
   max-width: 32rem;
   background: var(--color-superficie);
 }
+#pedido form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio);
+}
+#pedido fieldset {
+  max-width: none;
+  margin-bottom: 0;
+}
+#pedido form > button {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
 legend {
   padding: 0 0.4rem;
   font-weight: 700;
@@ -213,6 +229,7 @@ select,
 textarea {
   font-size: 1rem;
   font-family: inherit;
+  color: var(--color-texto);
   padding: 0.5rem 0.7rem;
   width: 100%;
   border: 1px solid var(--borde);
@@ -315,6 +332,39 @@ aside p {
 /* ── 14. GRID DE PRODUCTOS ─────────────────────────────────────────────── */
 #productos {
   display: block;
+}
+.titulo-desplegable {
+  margin: 0 0 var(--espacio);
+}
+.boton-desplegable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio);
+  width: 100%;
+  text-align: left;
+  font-size: 1.25rem;
+  background: var(--color-principal);
+}
+.boton-desplegable::after {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  flex: 0 0 auto;
+  border-right: 3px solid currentColor;
+  border-bottom: 3px solid currentColor;
+  transform: translateY(-0.15rem) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.boton-desplegable[aria-expanded="true"]::after {
+  transform: translateY(0.15rem) rotate(225deg);
+}
+.boton-desplegable:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 3px;
+}
+.boton-galeria {
+  margin-top: var(--espacio);
 }
 #lista-productos {
   display: grid;
@@ -776,6 +826,23 @@ body { transition: background-color .25s, color .25s; }
 
 #preferencias, #ubicacion { margin-top: var(--espacio-lg); }
 #preferencias button, #ubicacion button { margin-right: 0.5rem; }
+.ubicacion-columnas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-lg);
+}
+.ubicacion-columnas h2 { margin-top: 0; }
+.mapa iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--radio);
+}
+@media (max-width: 40rem) {
+  .ubicacion-columnas { grid-template-columns: 1fr; }
+  #pedido form { grid-template-columns: 1fr; }
+  #pedido form > button { grid-column: auto; }
+}
 .control-orden {
   display: flex;
   flex-wrap: wrap;
@@ -876,6 +943,9 @@ body { transition: background-color .25s, color .25s; }
   min-height: 1.5em;
   color: var(--color-suave);
 }
+#pedir-menu {
+  margin-top: var(--espacio);
+}
 @media (max-width: 40rem) {
   .producto-menu {
     align-items: flex-start;
@@ -883,4 +953,36 @@ body { transition: background-color .25s, color .25s; }
   .producto-menu button {
     white-space: nowrap;
   }
+}
+h1 { font-size: clamp(1.75rem, 4vw + 1rem, 3rem); }
+h2 { font-size: clamp(1.35rem, 2.5vw + 0.6rem, 2rem); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/*@media (prefers-color-scheme: dark) {
+  body:not(.tema-claro):not(.tema-oscuro) {
+    --color-principal:  #7fb3e0;
+    --color-acento:     #e88a5c;
+    --color-texto:      #e6edf3;
+    --color-suave:      #9aa8b4;
+    --color-fondo:      #16202a;
+    --color-superficie: #1e2b38;
+    --borde:            #33465a;
+  }
+}*/
+@media (width >= 48rem) {
+  .controles { gap: var(--espacio-lg); }
+}
+
+img { max-width: 100%; height: auto; }
+
+.tarjeta img {
+  width: 100%;
+  aspect-ratio: 3 / 2;      /* reserva el espacio antes de que cargue */
+  object-fit: cover;
 }
