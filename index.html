@@ -11,7 +11,7 @@
 
 <body>
   <header>
-    <h1>Pollos Mamfre</h1>
+    <h1>Pollos Liam</h1>
     <p>El mejor pollo de Colquencha</p>
     <p id="aviso-stock"></p>
     <button id="menu-toggle" aria-expanded="false" aria-controls="menu-movil" class="btn-menu-movil">
@@ -69,8 +69,20 @@
 
       <p id="resultado" aria-live="polite"></p>
 
-      <!-- Las tarjetas ya no se escriben a mano: render.js las genera desde datos.js -->
-      <div id="lista-productos"></div>
+      <div class="productos-carrusel" id="productos-carrusel" role="region"
+        aria-roledescription="carrusel" aria-label="Productos del menú">
+        <button type="button" class="productos-carrusel-flecha productos-carrusel-anterior"
+          id="producto-anterior" aria-label="Ver producto anterior" aria-controls="lista-productos">
+          &#10094;
+        </button>
+        <div id="lista-productos" tabindex="0" aria-label="Productos del menú"></div>
+        <button type="button" class="productos-carrusel-flecha productos-carrusel-siguiente"
+          id="producto-siguiente" aria-label="Ver siguiente producto" aria-controls="lista-productos">
+          &#10095;
+        </button>
+        <div id="productos-dots" class="productos-carrusel-dots" role="group"
+          aria-label="Elegir producto"></div>
+      </div>
       <button type="button" id="galeria-toggle" class="boton-galeria" aria-expanded="false"
         aria-controls="galeria-productos">Galería</button>
       <figure id="galeria-productos" hidden>
@@ -204,6 +216,8 @@
         </div>
         <div class="ubicacion-cercania">
           <h2>¿Estás cerca?</h2>
+          <img class="imagen-ubicacion" src="LOCAL%20.jpeg" alt="Fachada del local de Pollitos Liam"
+            width="1108" height="1242" loading="lazy">
           <p>Calculamos la distancia hasta el local. Tu ubicación no sale de tu navegador.</p>
           <button type="button" id="ubicarme">Calcular mi distancia</button>
           <p id="estado-ubicacion" role="status" aria-live="polite"></p>

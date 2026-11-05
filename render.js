@@ -1,6 +1,8 @@
 // ── 1. SELECCIÓN DE CONTENEDORES Y ELEMENTOS CON JQUERY ────────────────
 const $contenedor = $("#lista-productos");
+const $productosDots = $("#productos-dots");
 const $titulos = $("h2");
+let indiceProductoActivo = 0;
 
 console.log("Contenedor de productos detectado por jQuery:", $contenedor.length > 0);
 console.log("Cantidad de títulos h2 en la página:", $titulos.length);
@@ -12,7 +14,9 @@ function crearTarjeta(producto) {
     .addClass("tarjeta")
     .toggleClass("agotado", !producto.disponible)
     .attr("data-nombre", producto.nombre)
-    .attr("data-categoria", producto.categoria);
+    .attr("data-categoria", producto.categoria)
+    .attr("role", "group")
+    .attr("aria-roledescription", "diapositiva");
 
   // 2. Crear la imagen si existe
   if (producto.imagen) {
@@ -20,6 +24,7 @@ function crearTarjeta(producto) {
       .attr("src", producto.imagen)
       .attr("alt", producto.nombre)
       .attr("loading", "lazy")
+      .attr("draggable", "false")
       .addClass("tarjeta-img")
       .appendTo($articulo);
   }
@@ -70,6 +75,54 @@ function crearTarjeta(producto) {
   return $articulo;
 }
 
+function actualizarIndicadorProductos() {
+  const tarjetas = $contenedor.children(".tarjeta");
+  if (!tarjetas.length || !$contenedor[0].clientWidth) return;
+
+  indiceProductoActivo = Math.max(
+    0,
+    Math.min(
+      Math.round($contenedor[0].scrollLeft / $contenedor[0].clientWidth),
+      tarjetas.length - 1
+    )
+  );
+  $productosDots.children().attr("aria-current", "false")
+    .eq(indiceProductoActivo).attr("aria-current", "true");
+}
+
+function irAProducto(indice) {
+  const cantidad = $contenedor.children(".tarjeta").length;
+  if (!cantidad) return;
+
+  indiceProductoActivo = (indice + cantidad) % cantidad;
+  $contenedor[0].scrollLeft = indiceProductoActivo * $contenedor[0].clientWidth;
+  actualizarIndicadorProductos();
+}
+
+function actualizarCarruselProductos() {
+  const tarjetas = $contenedor.children(".tarjeta");
+  const cantidad = tarjetas.length;
+  const mostrarControles = cantidad > 1;
+
+  $productosDots.empty();
+  $("#producto-anterior, #producto-siguiente, #productos-dots").prop("hidden", !mostrarControles);
+
+  tarjetas.each(function (indice) {
+    const nombre = $(this).attr("data-nombre");
+    $(this).attr("aria-label", `Producto ${indice + 1} de ${cantidad}: ${nombre}`);
+    $("<button>")
+      .attr("type", "button")
+      .addClass("productos-carrusel-dot")
+      .attr("aria-label", `Ver ${nombre}`)
+      .attr("aria-current", String(indice === 0))
+      .attr("data-indice", indice)
+      .appendTo($productosDots);
+  });
+
+  indiceProductoActivo = 0;
+  $contenedor[0].scrollLeft = 0;
+}
+
 // ── 3. PATRÓN RENDER TOTALMENTE GESTIONADO POR JQUERY ───────────────────
 function render(lista) {
   // Limpiar el contenedor con el método .empty() de jQuery
@@ -80,6 +133,7 @@ function render(lista) {
       .addClass("sin-productos")
       .text("No se encontraron productos disponibles con ese criterio.")
       .appendTo($contenedor);
+    actualizarCarruselProductos();
     return;
   }
 
@@ -88,6 +142,7 @@ function render(lista) {
     const $tarjeta = crearTarjeta(producto);
     $contenedor.append($tarjeta);
   });
+  actualizarCarruselProductos();
 }
 
 // ── 4. RENDERIZADO INICIAL Y EXPLORACIÓN DEL ÁRBOL DOM ───────────────────

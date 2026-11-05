@@ -74,6 +74,81 @@ $(function () {
   // Render inicial al cargar el DOM
   actualizar();
 
+  const listaCarruselProductos = document.querySelector("#lista-productos");
+
+  $("#producto-anterior").on("click", () => irAProducto(indiceProductoActivo - 1));
+  $("#producto-siguiente").on("click", () => irAProducto(indiceProductoActivo + 1));
+
+  $("#productos-dots").on("click", ".productos-carrusel-dot", function () {
+    irAProducto(Number(this.dataset.indice));
+  });
+
+  listaCarruselProductos.addEventListener("scroll", actualizarIndicadorProductos, { passive: true });
+
+  listaCarruselProductos.addEventListener("keydown", (event) => {
+    if (event.target !== listaCarruselProductos) return;
+    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      const incremento = event.key === "ArrowRight" ? 1 : -1;
+      irAProducto(indiceProductoActivo + incremento);
+    }
+  });
+
+  let punteroCarruselActivo = null;
+  let inicioArrastreCarrusel = 0;
+  let scrollInicialCarrusel = 0;
+  let arrastrandoCarrusel = false;
+  let cancelarClickCarrusel = false;
+
+  listaCarruselProductos.addEventListener("pointerdown", (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    if (event.target instanceof Element &&
+        event.target.closest("a, button, input, select, textarea, label, iframe")) return;
+
+    punteroCarruselActivo = event.pointerId;
+    inicioArrastreCarrusel = event.clientX;
+    scrollInicialCarrusel = listaCarruselProductos.scrollLeft;
+    arrastrandoCarrusel = false;
+    listaCarruselProductos.setPointerCapture(event.pointerId);
+  });
+
+  listaCarruselProductos.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== punteroCarruselActivo) return;
+    const desplazamiento = event.clientX - inicioArrastreCarrusel;
+    if (Math.abs(desplazamiento) > 4) {
+      arrastrandoCarrusel = true;
+      listaCarruselProductos.classList.add("arrastrando");
+      listaCarruselProductos.scrollLeft = scrollInicialCarrusel - desplazamiento;
+      actualizarIndicadorProductos();
+      if (event.cancelable) event.preventDefault();
+    }
+  });
+
+  const finalizarArrastreCarrusel = (event) => {
+    if (event.pointerId !== punteroCarruselActivo) return;
+    punteroCarruselActivo = null;
+    listaCarruselProductos.classList.remove("arrastrando");
+    if (arrastrandoCarrusel) {
+      cancelarClickCarrusel = true;
+      window.setTimeout(() => {
+        cancelarClickCarrusel = false;
+      }, 0);
+    }
+  };
+
+  listaCarruselProductos.addEventListener("pointerup", finalizarArrastreCarrusel);
+  listaCarruselProductos.addEventListener("pointercancel", finalizarArrastreCarrusel);
+  listaCarruselProductos.addEventListener("lostpointercapture", finalizarArrastreCarrusel);
+  listaCarruselProductos.addEventListener("dragstart", (event) => event.preventDefault());
+  listaCarruselProductos.addEventListener("click", (event) => {
+    if (!cancelarClickCarrusel) return;
+    event.preventDefault();
+    event.stopPropagation();
+    cancelarClickCarrusel = false;
+  }, true);
+
+  window.addEventListener("resize", () => irAProducto(indiceProductoActivo));
+
   $(".boton-desplegable, .boton-galeria").on("click", function () {
     const boton = this;
     const contenido = document.getElementById(boton.getAttribute("aria-controls"));
