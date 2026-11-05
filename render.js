@@ -54,7 +54,7 @@ function crearTarjeta(producto) {
     $("<button>")
       .attr("type", "button")
       .addClass("btn-seleccionar")
-      .text("Pedir este plato")
+      .text("Pedir")
       .on("click", function (e) {
         e.stopPropagation();
         if (typeof seleccionarProductoEnFormulario === "function") {

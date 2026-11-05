@@ -12,6 +12,8 @@ function renderMenuCliente() {
   productos.forEach((producto) => {
     const item = document.createElement("li");
     item.className = "producto-menu";
+    const cantidadEnMenu = productosDeMiMenu.get(producto.nombre) || 0;
+    const llegoAlLimite = cantidadEnMenu >= 10;
 
     const detalle = document.createElement("div");
     detalle.className = "producto-menu-detalle";
@@ -34,8 +36,8 @@ function renderMenuCliente() {
     boton.dataset.accion = "agregar";
     boton.dataset.producto = producto.nombre;
 
-    boton.textContent = "Agregar";
-    boton.disabled = !producto.disponible || producto.stock <= 0;
+    boton.textContent = llegoAlLimite ? "Máximo 10" : "Agregar";
+    boton.disabled = !producto.disponible || producto.stock <= 0 || llegoAlLimite;
     item.append(detalle, boton);
     listaMenuPollitos.append(item);
   });
@@ -113,12 +115,18 @@ document.querySelector("#tablero").addEventListener("click", (event) => {
       return;
     }
 
-    productosDeMiMenu.set(
-      nombreProducto,
-      (productosDeMiMenu.get(nombreProducto) || 0) + 1
-    );
-    estadoMenuCliente.textContent =
-      `Se agregó una unidad de ${producto.nombre}.`;
+    const cantidadActual = productosDeMiMenu.get(nombreProducto) || 0;
+    if (cantidadActual >= 10) {
+      estadoMenuCliente.textContent =
+        `El máximo permitido es 10 unidades de ${producto.nombre}.`;
+      return;
+    }
+
+    const nuevaCantidad = cantidadActual + 1;
+    productosDeMiMenu.set(nombreProducto, nuevaCantidad);
+    estadoMenuCliente.textContent = nuevaCantidad === 10
+      ? `Se agregó una unidad de ${producto.nombre}. Alcanzaste el máximo de 10.`
+      : `Se agregó una unidad de ${producto.nombre}.`;
   } else if (boton.dataset.accion === "reducir") {
     const cantidad = productosDeMiMenu.get(nombreProducto);
     if (!cantidad) return;
