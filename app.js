@@ -40,7 +40,7 @@ $(function () {
     }
   });
 
-  // 3. Efectos interactivos con jQuery sobre la tabla de horarios y precios
+  // 3. Efectos interactivos con jQ  b uery sobre la tabla de horarios y precios
   $("table tbody tr").hover(
     function () {
       $(this).addClass("fila-hover");

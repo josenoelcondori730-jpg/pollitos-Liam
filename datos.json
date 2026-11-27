@@ -1,77 +1,33 @@
 {
   "negocio": {
-    "nombre": "Pollos Liam"
-  },
-  "productos": [
-    {
-      "nombre": "Pollo a la broaster",
-      "precio": 17,
-      "unidad": "combo",
-      "stock": 40,
-      "disponible": true
+    "nombre": "Pollos Liam",
+    "direccion": "",
+    "coordenadas": {
+      "lat": null,
+      "lng": null
     },
-    {
-      "nombre": "Pollo spiedo",
-      "precio": 17,
-      "unidad": "combo",
-      "stock": 25,
-      "disponible": true
-    },
-    {
-      "nombre": "Milanesa de pollo",
-      "precio": 15,
-      "unidad": "plato",
-      "stock": 8,
-      "disponible": true
-    },
-    {
-      "nombre": "Alitas de pollo",
-      "precio": 10,
-      "unidad": "porción",
-      "stock": 0,
-      "disponible": false
-    },
-    {
-      "nombre": "Nuggets de pollo",
-      "precio": 10,
-      "unidad": "porción",
-      "stock": 30,
-      "disponible": true
-    },
-    {
-      "nombre": "Papas fritas extra",
-      "precio": 10,
-      "unidad": "porción",
-      "stock": 2,
-      "disponible": true
-    },
-    {
-      "nombre": "Arroz chaufa",
-      "precio": 12,
-      "unidad": "porción",
-      "stock": 50,
-      "disponible": true
-    },
-    {
-      "nombre": "Fideo tallarín",
-      "precio": 12,
-      "unidad": "porción",
-      "stock": 0,
-      "disponible": false
-    },
-    {
-      "nombre": "Coca-Cola 2 L",
-      "precio": 15,
-      "unidad": "botella",
-      "stock": 50,
-      "disponible": true
-    },
-    {
-      "nombre": "Cocaquina 2 L",
-      "precio": 11,
-      "unidad": "botella",
-      "stock": 0,
-      "disponible": false
+    "horario": {
+      "apertura": "",
+      "cierre": "",
+      "dias": []
     }
+  },
+  "categorias": [
+    "Combos",
+    "Platos",
+    "Porciones",
+    "Bebidas"
+  ],
+  "productos": [
+    { "nombre": "Pollo a la broaster", "precio": 17.00, "unidad": "combo",   "categoria": "Combos",   "stock": 40, "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Pollo spiedo",        "precio": 17.00, "unidad": "combo",   "categoria": "Combos",   "stock": 25, "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Milanesa de pollo",   "precio": 15.00, "unidad": "plato",   "categoria": "Platos",   "stock": 8,  "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Alitas de pollo",     "precio": 10.00, "unidad": "porción", "categoria": "Porciones", "stock": 0,  "disponible": false, "proveedor": "Proveedor local" },
+    { "nombre": "Nuggets de pollo",    "precio": 10.00, "unidad": "porción", "categoria": "Porciones", "stock": 30, "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Papas fritas extra",  "precio": 10.00, "unidad": "porción", "categoria": "Porciones", "stock": 2,  "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Arroz chaufa",        "precio": 12.00, "unidad": "porción", "categoria": "Porciones", "stock": 50, "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Fideo tallarín",      "precio": 12.00, "unidad": "porción", "categoria": "Porciones", "stock": 0,  "disponible": false, "proveedor": "Proveedor local" },
+    { "nombre": "Coca-Cola 2 L",       "precio": 15.00, "unidad": "botella", "categoria": "Bebidas",  "stock": 50, "disponible": true,  "proveedor": "Proveedor local" },
+    { "nombre": "Cocaquina 2 L",       "precio": 11.00, "unidad": "botella", "categoria": "Bebidas",  "stock": 0,  "disponible": false, "proveedor": "Proveedor local" }
   ]
 }
